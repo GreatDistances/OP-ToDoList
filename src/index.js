@@ -1,8 +1,8 @@
 import List from './list.js';
-//import modifyListItem from './modifyListItem.js';
-//import modifyList from './modifyList.js';
+import {addNewListItem} from './modifyListItem.js';
+import {displayAllLists, displayList, addNewList, deleteList, renameList, currentList} from './modifyList.js';
 
-const lists = [
+let lists = [
     {
         listId: "L98",
         listTitle: "Test List A",
@@ -36,33 +36,27 @@ const lists = [
     }
 ];
 
-function viewAllLists() {
-    const listsDisplay =
-        lists.map(item => ({ listId: item.listId, listTitle: item.listTitle, listItems: item.listItems}));
-    console.log(listsDisplay);
-}
+displayAllLists();
 
-viewAllLists();
+const newList = List.createNewList("Test List C");
+addNewList(newList);
 
-const testListCreate = List.createNewList("Test List C");
-console.log(testListCreate);
+// NEED TO REPLACE "newList" WITH REFERENCE TO CORRECT LIST FOR A GIVEN ITEM
+const newItem = newList.createListItem("Do the dishes", "Wash and dry dishes before party", 1, "2024/03/01", "don't forget!");
+console.log(newItem);
+addNewListItem(newList, newItem);
 
-const testItemCreate = testListCreate.createListItem("Do the dishes", "Wash and dry dishes before party", 1, "2024/03/01", "don't forget!");
-console.log(testItemCreate);
+displayList("L10001");
+console.log(currentList);
+displayList("L98");
+console.log(currentList);
 
-// move this to another module ?
-const addNewListItem = (list, listItem) => {
-    list.listItems.push(listItem);
-}
-addNewListItem(testListCreate, testItemCreate);
+deleteList("L99");
+deleteList("1");
+console.log(currentList);
 
-// move this to another module ?
-const addNewList = (list) => {
-    lists.push(list)
-}
-addNewList(testListCreate);
+renameList("L01", "John");
+renameList("L98", "Pork Soda");
 
-viewAllLists(); // remove this when ready
-
-
+export {lists}
 
