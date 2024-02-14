@@ -13,8 +13,4 @@ export default class List {
     static createNewList(listTitle) {
         return new List(listTitle);
     }
-
-   createListItem(itemTitle, description, priority, dueDate, notes) {
-        return new ListItem(this.listId, itemTitle, description, priority, dueDate, notes);
-    }
 }
