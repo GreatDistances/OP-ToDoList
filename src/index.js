@@ -40,6 +40,8 @@ let lists = [
 
 displayAllLists();
 
+// TEST INPUT
+
 addNewList(List.createNewList("Test List C"));
 addNewList(List.createNewList("Test List D"));
 
