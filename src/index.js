@@ -1,52 +1,44 @@
-import List from './list.js';
+import {lists, addNewList, deleteList, getCurrentListIndex } from './lists.js';
 import {addListItem} from './addListItem.js';
 import {createListItem} from './createListItem.js';
-import {displayAllLists, displayList, addNewList, deleteList, renameList, currentListIndex} from './modifyList.js';
+import createList from './createList.js';
+import displayAllLists from './displayAllLists.js';
+import {displayList} from './displayList.js';
 import {deleteItem, setItemTitle, setItemDescription, setItemPriority, setItemNotes, setItemDueDate} from "./modifyItem.js";
 
-let lists = [
-    {
-        listId: "L98",
-        listTitle: "Test List A",
-        listItems: [
-            {
-                "itemId": "I1",
-                "itemTitle": "Item title for I1"
-        },
-        {
-            "itemId": "I2",
-            "itemTitle": "Item title for I2"
-        }
-        ]
-    },
-    {
-        listId: "L99",
-        listTitle: "Test List B",
-        listItems: [
-        {
-            "itemId": "I3",
-            "itemTitle": "Item title for I3"
-        },
-        {
-        "itemId": "I4",
-        "itemTitle": "Item title for I4"
-    },
-        {
-        "itemId": "I5",
-        "itemTitle": "Item title for I5"
-    }]
-    }
-];
-
 displayAllLists();
+displayList(getCurrentListIndex());
+
+const addListDialog = document.querySelector("#addListDialog");
+
+const openDialogBtn = document.querySelector("#openDialogBtn");
+openDialogBtn.addEventListener("click", () => {
+    addListDialog.showModal();
+})
+
+const closeDialogBtn = document.querySelector("#closeDialogBtn");
+closeDialogBtn.addEventListener("click", () => {
+    addListDialog.close();
+})
+
+const submitListBtn = document.querySelector("#submitListBtn");
+submitListBtn.addEventListener("click", () => {
+    const newListName = document.querySelector("#listTitle").value;
+    addNewList(createList(newListName));
+    addListDialog.close();
+});
+
+
+
+
+
+
+
 
 // TEST INPUT
-
+/* 
 addNewList(List.createNewList("Test List C"));
 addNewList(List.createNewList("Test List D"));
-
-displayList("L10001");
-console.log(currentListIndex);
 
 addListItem(currentListIndex, createListItem("Do the dishes", "Wash and dry dishes before party", 1, "2024/03/01", "don't forget!"));
 addListItem(currentListIndex, createListItem("2nd sample add", "asdf", 2, "2024/04/02", "no notes"));
@@ -107,7 +99,7 @@ setItemDueDate("I100003", "2022", "1", "1");
 setItemDueDate("I100003", 2024, 5, 2);
 setItemDueDate("I100003", "-");
 
-displayAllLists();
+displayAllLists(); */
 
 export {lists};
 

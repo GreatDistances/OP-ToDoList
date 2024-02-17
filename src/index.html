@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
     <title>To Do List</title>
 </head>
 <body>
     <h1>All Lists</h1>
-    <button>Add A New List</button>
-    <ul id="lists">
-    </ul>
+    <div id="sideBar" class="sideBar">
+        <button id="openDialogBtn" class="openDialogBtn">Add A New List</button>
+        <div id="listContainer" class="listContainer">
+        </div>
+    </div>
+    <div id="listItemsContainer" class="listItemsContainer">
+        asdf adsf asdf
+    </div>
+    <dialog id="addListDialog" class="addListDialog">
+        <form>
+            <label for="listTitle">List Title</label>
+            <input type="text" name="listTitle" id="listTitle"></input>
+        </form>
+        <button id="submitListBtn" class="submitListBtn">Create New List</button>
+        <button id="closeDialogBtn" class="closeDialogBtn">Cancel</button>
+    </dialog>
     <script src="index.js" type="module"></script>
 </body>
 </html>

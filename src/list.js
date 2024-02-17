@@ -1,5 +1,3 @@
-import ListItem from './listItem.js';
-
 export default class List {
     static newListId = 10000;
 
@@ -10,7 +8,4 @@ export default class List {
     }
 
     // static method for creating new lists, not necessary on instances of class
-    static createNewList(listTitle) {
-        return new List(listTitle);
-    }
 }

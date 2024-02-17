@@ -1,4 +1,4 @@
-import {lists} from './index.js';
+import {lists} from './lists.js';
 
 const sendMsg = (msg) => {
     console.log(msg);

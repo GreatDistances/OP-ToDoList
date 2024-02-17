@@ -1,6 +1,5 @@
-import {lists} from './index.js';
-import {displayList} from './modifyList.js';
-import { currentListIndex } from './modifyList.js';
+import {lists, getCurrentListIndex, setCurrentListIndex } from './lists.js';
+import {displayList} from './displayList.js';
 
 const sendMsg = (msg) => {
     console.log(msg);
@@ -13,7 +12,7 @@ const checkIfListIndexExists = () => {
 }
 
 const findItemIndexInList = (id) => {
-    const index = lists[currentListIndex].listItems.findIndex(item => item.itemId === id);
+    const index = lists[getCurrentListIndex()].listItems.findIndex(item => item.itemId === id);
     return index;
 }
 
