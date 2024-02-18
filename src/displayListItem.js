@@ -31,14 +31,26 @@ const displayListItems = (arr) => {
         listItemsContainer.append(item);
         item.append(itemTable);
         itemTable.append(itemTitleRow);
+        itemTable.append(itemDataRow);
 
         createTableCell("itemTitle", itemTitleRow);
+
+        const itemIsCompletedCheckBoxTd = document.createElement("td");
+        itemDataRow.append(itemIsCompletedCheckBoxTd);
+
+        const itemIsCompletedCheckbox = document.createElement("INPUT");
+        itemIsCompletedCheckbox.setAttribute("type", "checkbox");
+        itemIsCompletedCheckbox.checked = arr[i].itemIsCompleted;
+        itemIsCompletedCheckbox.addEventListener("click", () => {
+            arr[i].itemIsCompleted = !arr[i].itemIsCompleted;
+        })
+        itemIsCompletedCheckBoxTd.append(itemIsCompletedCheckbox);
 
         const itemFields = ["itemDescription", "itemPriority", "itemDueDate", "itemNotes"];
         for (let field of itemFields) {
             createTableCell(field, itemDataRow);
         }
-        itemTable.append(itemDataRow);
+
 
         const deleteBtn = document.createElement("button");
         deleteBtn.innerText = "Delete";

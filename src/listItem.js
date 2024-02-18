@@ -8,5 +8,6 @@ export default class ListItem {
         this.itemPriority = itemPriority;
         this.itemDueDate = itemDueDate;
         this.itemNotes = itemNotes;
+        this.itemIsCompleted = false;
     }
 }
