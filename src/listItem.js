@@ -1,12 +1,12 @@
 export default class ListItem {
     static newItemId = 100000;
 
-    constructor(itemTitle, description, priority, dueDate, notes) {
+    constructor(itemTitle, itemDescription, itemPriority, itemDueDate, itemNotes) {
         this.itemId = `I${++ListItem.newItemId}`; // adds I prefix to each item
         this.itemTitle = itemTitle;
-        this.description = description;
-        this.priority = priority;
-        this.dueDate = dueDate;
-        this.notes = notes;
+        this.itemDescription = itemDescription;
+        this.itemPriority = itemPriority;
+        this.itemDueDate = itemDueDate;
+        this.itemNotes = itemNotes;
     }
 }
