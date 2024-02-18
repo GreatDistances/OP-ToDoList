@@ -1,23 +1,24 @@
-import {lists, addNewList, deleteList, getCurrentListIndex } from './lists.js';
-import {addListItem} from './addListItem.js';
+import {lists, addNewList, deleteList, getCurrentListId } from './lists.js';
+import {addItem} from './addItem.js';
 import {createListItem} from './createListItem.js';
 import createList from './createList.js';
 import displayAllLists from './displayAllLists.js';
 import {displayList} from './displayList.js';
-import {deleteItem, setItemTitle, setItemDescription, setItemPriority, setItemNotes, setItemDueDate} from "./modifyItem.js";
+import {setItemTitle, setItemDescription, setItemPriority, setItemNotes, setItemDueDate} from "./modifyItem.js";
 
 displayAllLists();
-displayList(getCurrentListIndex());
+displayList(getCurrentListId());
 
 const addListDialog = document.querySelector("#addListDialog");
+const addListForm = document.querySelector("#addListForm");
 
-const openDialogBtn = document.querySelector("#openDialogBtn");
-openDialogBtn.addEventListener("click", () => {
+const openAddListDialogBtn = document.querySelector("#openAddListDialogBtn");
+openAddListDialogBtn.addEventListener("click", () => {
     addListDialog.showModal();
 })
 
-const closeDialogBtn = document.querySelector("#closeDialogBtn");
-closeDialogBtn.addEventListener("click", () => {
+const closeAddListDialogBtn = document.querySelector("#closeAddListDialogBtn");
+closeAddListDialogBtn.addEventListener("click", () => {
     addListDialog.close();
 })
 
@@ -25,6 +26,7 @@ const submitListBtn = document.querySelector("#submitListBtn");
 submitListBtn.addEventListener("click", () => {
     const newListName = document.querySelector("#listTitle").value;
     addNewList(createList(newListName));
+    addListForm.reset();
     addListDialog.close();
 });
 
@@ -40,16 +42,16 @@ submitListBtn.addEventListener("click", () => {
 addNewList(List.createNewList("Test List C"));
 addNewList(List.createNewList("Test List D"));
 
-addListItem(currentListIndex, createListItem("Do the dishes", "Wash and dry dishes before party", 1, "2024/03/01", "don't forget!"));
-addListItem(currentListIndex, createListItem("2nd sample add", "asdf", 2, "2024/04/02", "no notes"));
-addListItem(currentListIndex, createListItem("2nd sample add", "asdf", 2, "2024/04/02", "no notes"));
+addListItem(CurrentListId, createListItem("Do the dishes", "Wash and dry dishes before party", 1, "2024/03/01", "don't forget!"));
+addListItem(CurrentListId, createListItem("2nd sample add", "asdf", 2, "2024/04/02", "no notes"));
+addListItem(CurrentListId, createListItem("2nd sample add", "asdf", 2, "2024/04/02", "no notes"));
 
 displayList("L98");
-console.log(currentListIndex);
+console.log(CurrentListId);
 
 deleteList("L99");
 deleteList("A");  // should return error message in console
-console.log(currentListIndex);
+console.log(CurrentListId);
 
 renameList("X01", "John"); // should return error message in console
 renameList("L98", "Pork Soda");

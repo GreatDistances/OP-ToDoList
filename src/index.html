@@ -9,7 +9,7 @@
 <body>
     <h1>All Lists</h1>
     <div id="sideBar" class="sideBar">
-        <button id="openDialogBtn" class="openDialogBtn">Add A New List</button>
+        <button id="openAddListDialogBtn" class="openAddListDialogBtn">Add A New List</button>
         <div id="listContainer" class="listContainer">
         </div>
     </div>
@@ -17,12 +17,28 @@
         asdf adsf asdf
     </div>
     <dialog id="addListDialog" class="addListDialog">
-        <form>
+        <form id="addListForm">
             <label for="listTitle">List Title</label>
             <input type="text" name="listTitle" id="listTitle"></input>
         </form>
         <button id="submitListBtn" class="submitListBtn">Create New List</button>
-        <button id="closeDialogBtn" class="closeDialogBtn">Cancel</button>
+        <button id="closeAddListDialogBtn" class="closeAddListDialogBtn">Cancel</button>
+    </dialog>
+    <dialog id="addItemDialog" class="addItemDialog">
+        <form id="addItemForm">
+            <label for="itemTitle">Title</label>
+            <input type="text" name="itemTitle" id="itemTitle"></input>
+            <label for="itemTitle">Description</label>
+            <input type="text" name="itemDescription" id="itemDescription"></input>
+            <label for="itemDueDate">Due Date</label>
+            <input type="text" name="itemDueDate" id="itemDueDate"></input>
+            <label for="itemPriority">Priority</label>
+            <input type="text" name="itemPriority" id="itemPriority"></input>
+            <label for="itemNotes">Notes</label>
+            <input type="text" name="itemNotes" id="itemNotes"></input>
+        </form>
+        <button id="submitItemBtn" class="submitItemBtn">Create New Item</button>
+        <button id="closeAddItemDialogBtn" class="closeAddItemDialogBtn">Cancel</button>
     </dialog>
     <script src="index.js" type="module"></script>
 </body>

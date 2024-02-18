@@ -1,4 +1,4 @@
-import {lists, getCurrentListIndex, setCurrentListIndex } from './lists.js';
+import {lists, getCurrentListId, setCurrentListId } from './lists.js';
 import {displayList} from './displayList.js';
 
 const sendMsg = (msg) => {
@@ -6,34 +6,17 @@ const sendMsg = (msg) => {
 }
 
 const checkIfListIndexExists = () => {
-    if (currentListIndex === -1) {
+    if (CurrentListId === -1) {
         return false;
     }
 }
 
 const findItemIndexInList = (id) => {
-    const index = lists[getCurrentListIndex()].listItems.findIndex(item => item.itemId === id);
+    const index = lists[getCurrentListId()].listItems.findIndex(item => item.itemId === id);
     return index;
 }
 
-const deleteItem = (id) => {
-    const key = "delete"
-    // check if currentList exists.  If not, return.
-    if (!checkIfListIndexExists) {
-        sendMsg(`List not found for ${key} of item ${id}`);
-        return;
-    }
-    // iterate through listItems in currentList to find matching itemId and reference by index.
-    const index = findItemIndexInList(id);
-    // if item index does not exist in array of objects, send message and return.
-    if (index === -1) {
-        sendMsg(`Item ID# ${id} not found for ${key}.`)
-        return;
-    }
-    // else if item index does exist, delete item, send message.
-    lists[currentListIndex].listItems.splice(index, 1);
-    sendMsg(`Item ID# ${id} successful ${key}`);
-}
+
 
 const setItemTitle = (id, newData) => {
     const key = "title";
@@ -55,7 +38,7 @@ const setItemTitle = (id, newData) => {
         return;
     }
     // else if item index does exist, delete item, send message.
-    lists[currentListIndex].listItems[index].itemTitle = newData;
+    lists[currentListId].listItems[index].itemTitle = newData;
     sendMsg(`Item ID# ${id} title changed to "${newData}"`);
 }
 
@@ -74,7 +57,7 @@ const setItemDescription = (id, newData = "") => {
         return;
     }
     // else if item index does exist, delete item, send message.
-    lists[currentListIndex].listItems[index].description = newData;
+    lists[currentListId].listItems[index].description = newData;
     sendMsg(`Item ID# ${id} ${key} changed to "${newData}"`);
 }
 
@@ -102,7 +85,7 @@ const setItemPriority = (id, newData = "0") => {
         urgency += "!"
     }
     // else if item index does exist, delete item, send message.
-    lists[currentListIndex].listItems[index].priority = urgency;
+    lists[currentListId].listItems[index].priority = urgency;
     sendMsg(`Item ID# ${id} ${key} changed to "${urgency}"`);
 }
 
@@ -121,7 +104,7 @@ const setItemNotes = (id, newData = "") => {
         return;
     }
     // else if item index does exist, delete item, send message.
-    lists[currentListIndex].listItems[index].notes = newData;
+    lists[currentListId].listItems[index].notes = newData;
     sendMsg(`Item ID# ${id} ${key} changed to "${newData}"`);
 }
 
@@ -159,8 +142,8 @@ const setItemDueDate = (id, year, month, day = "") => {
         sendMsg(`Entry of ${dateEntry} ${key} is before today's date of ${today}.`);
     }
     // else if item index does exist, delete item, send message.
-    lists[currentListIndex].listItems[index].dueDate = dateEntry;
+    lists[currentListId].listItems[index].dueDate = dateEntry;
     sendMsg(`Item ID# ${id} ${key} changed to "${dateEntry}"`);
 }
 
-export {deleteItem, setItemTitle, setItemDescription, setItemPriority, setItemNotes, setItemDueDate};
+export {setItemTitle, setItemDescription, setItemPriority, setItemNotes, setItemDueDate};

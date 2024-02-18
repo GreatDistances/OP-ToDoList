@@ -1,4 +1,4 @@
-import { deleteItem } from "./modifyItem.js";
+import { deleteItem } from "./addItem.js";
 
 const listItemsContainer = document.querySelector("#listItemsContainer");
 

@@ -1,8 +1,8 @@
 import displayAllLists from './displayAllLists.js'
 import {displayList} from './displayList.js';
 
-const lists = [
-    {
+const lists = [];
+/*     {
         listId: "L98",
         listTitle: "Test List A",
         listItems: [
@@ -37,17 +37,39 @@ const lists = [
         "itemTitle": "Item title for I5"
     }]
     }
-];
+]; */
 
-let currentListIndex = lists[0].listId;
+let currentListId = -1;
 
-function setCurrentListIndex(num) {
-    currentListIndex = num;
-    return currentListIndex;
+function setCurrentListId(num) {
+    currentListId = num;
+    return currentListId;
+}
+
+function getCurrentListId() {
+    return currentListId;
 }
 
 function getCurrentListIndex() {
-    return currentListIndex;
+    const listId = getCurrentListId();
+    if (listId === -1) {
+        return;
+    }
+    const index = lists.map(e => e.listId).indexOf(listId);
+    return index;
+}
+
+function getItemIndex(currentItemId) {
+    const listIndex = getCurrentListIndex();
+    if (listIndex === -1) {
+        return -1;
+    }
+    const list = lists[listIndex];
+    if (!list.listItems) {
+        return -1;
+    }
+    const itemIndex = list.listItems.findIndex(item => item.itemId === currentItemId);
+    return itemIndex;
 }
 
 function getListsLength() {
@@ -61,8 +83,8 @@ const sendMsg = (msg) => {
 const addNewList = (list) => {
     lists.push(list)
     displayAllLists();
-    setCurrentListIndex((lists[lists.length - 1].listId));
-    displayList(getCurrentListIndex());
+    setCurrentListId((lists[getListsLength() -1].listId));
+    displayList(getCurrentListId());
 }
 
 const deleteList = (id) => {
@@ -72,8 +94,8 @@ const deleteList = (id) => {
     if (getListsLength() === 0) {
         displayList(-1);
     } else {
-        displayList(setCurrentListIndex(lists[0].listId));
+        displayList(setCurrentListId(lists[0].listId));
     }
 }
 
-export {lists, addNewList, deleteList, setCurrentListIndex, getCurrentListIndex, getListsLength}
+export {lists, addNewList, deleteList, setCurrentListId, getCurrentListId, getCurrentListIndex, getItemIndex, getListsLength}

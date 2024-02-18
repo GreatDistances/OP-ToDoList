@@ -1,5 +1,7 @@
-import {lists, getCurrentListIndex, setCurrentListIndex, getListsLength } from './lists.js';
+import {lists, getCurrentListId, setCurrentListId, getListsLength } from './lists.js';
 import displayListItems from './displayListItem.js';
+import { addItem } from './addItem.js';
+import { createListItem } from './createListItem.js';
 
 const displayList = (id) => {
     
@@ -9,15 +11,19 @@ const displayList = (id) => {
         return;
     }
 
-    setCurrentListIndex(id);
+    setCurrentListId(id);
     
     const titleTd = document.createElement("h2");
     let displayTitle;
-    const addListItemBtn = document.createElement("button");
     listItemsContainer.append(titleTd);
 
-    addListItemBtn.innerText = "Add new item";
-    listItemsContainer.append(addListItemBtn);
+    const addItemDialog = document.querySelector("#addItemDialog");
+    const openItemDialogBtn = document.createElement("button");
+    openItemDialogBtn.innerText = "Add new item";
+    openItemDialogBtn.addEventListener("click", () => {
+        addItemDialog.showModal();
+    })
+    listItemsContainer.append(openItemDialogBtn);
 
     for (let i = 0; i < lists.length; i++) {
         if (getListsLength === 0) {
@@ -37,5 +43,25 @@ const displayList = (id) => {
         }
     }
 }
+
+const closeAddItemDialogBtn = document.querySelector("#closeAddItemDialogBtn");
+closeAddItemDialogBtn.addEventListener("click", () => {
+    addItemDialog.close();
+})
+
+const addItemForm = document.querySelector('#addItemForm');
+
+const submitItemBtn = document.querySelector("#submitItemBtn");
+submitItemBtn.addEventListener("click", () => {
+    const newItemName = document.querySelector("#itemTitle").value;
+    const newItemDescription = document.querySelector("#itemDescription").value;
+    const newItemPriority = document.querySelector("#itemPriority").value;
+    const newItemDueDate = document.querySelector("#itemDueDate").value;
+    const newItemNotes = document.querySelector("#itemNotes").value;
+    addItem(createListItem(newItemName, newItemDescription, newItemPriority, newItemDueDate, newItemNotes));
+    displayList(getCurrentListId());
+    addItemDialog.close();
+    addItemForm.reset();
+});
 
 export {displayList}
