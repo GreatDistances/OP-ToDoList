@@ -1,4 +1,6 @@
 body {
+    width: 80%;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-areas:
@@ -9,9 +11,27 @@ body {
 .sideBar {
     grid-area: sidebar;
     background-color: lightpink;
+    padding: 15px;
 }
 
 .listItemsContainer {
     grid-area: listItemsContainer;
     background-color: lightblue;
+    padding: 15px;
+}
+
+.item {
+    padding: 10px;
+    border: 2px solid;
+}
+
+.itemTitle {
+    font-size: 1.25em;
+    padding-bottom: 5px;
+}
+
+.itemDataContainer {
+    display: grid;
+    grid-template-columns: 20px 20px 80px 2fr 1fr;
+    gap: 10px;
 }

@@ -7,7 +7,7 @@ const displayList = (id) => {
     
     listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
     if (!id || id === -1) {
-        listItemsContainer.innerText = "No List Selected";
+        listItemsContainer.innerText = "Add or Select a Project";
         return;
     }
 
@@ -19,7 +19,7 @@ const displayList = (id) => {
 
     const addItemDialog = document.querySelector("#addItemDialog");
     const openItemDialogBtn = document.createElement("button");
-    openItemDialogBtn.innerText = "Add new item";
+    openItemDialogBtn.innerText = "Add a task";
     openItemDialogBtn.addEventListener("click", () => {
         addItemDialog.showModal();
     })
@@ -36,9 +36,6 @@ const displayList = (id) => {
             if (lists[i].listItems.length > 0) {
                 displayListItems(lists[i].listItems);
                 console.log(lists[i].listItems);
-            } else {
-                const noItems = document.createElement("div").innerText = "No List Items";
-                listItemsContainer.append(noItems);
             }
         }
     }

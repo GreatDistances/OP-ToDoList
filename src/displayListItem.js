@@ -7,12 +7,14 @@ const displayListItems = (arr) => {
         console.log(arr[i].itemTitle);
 
         const item = document.createElement("div");
-        const itemTable = document.createElement("table");
-        const itemTitleRow = document.createElement("tr");
-        const itemDataRow = document.createElement("tr");
+        item.classList.add("item");
+        const itemTitle = document.createElement("div");
+        itemTitle.classList.add("itemTitle");
+        const itemDataContainer = document.createElement("div");
+        itemDataContainer.classList.add("itemDataContainer");
 
-        const createTableCell = (text, container) => {
-            const cell = document.createElement("td");
+        const createListDataContainer = (text, container) => {
+            const cell = document.createElement("div");
             cell.innerText = arr[i][text];
             container.append(cell);
             cell.contentEditable="true";
@@ -29,14 +31,13 @@ const displayListItems = (arr) => {
         }
 
         listItemsContainer.append(item);
-        item.append(itemTable);
-        itemTable.append(itemTitleRow);
-        itemTable.append(itemDataRow);
+        item.append(itemTitle);
+        item.append(itemDataContainer);
 
-        createTableCell("itemTitle", itemTitleRow);
+        createListDataContainer("itemTitle", itemTitle);
 
-        const itemIsCompletedCheckBoxTd = document.createElement("td");
-        itemDataRow.append(itemIsCompletedCheckBoxTd);
+        const itemIsCompletedCheckBoxDiv = document.createElement("div");
+        itemDataContainer.append(itemIsCompletedCheckBoxDiv);
 
         const itemIsCompletedCheckbox = document.createElement("INPUT");
         itemIsCompletedCheckbox.setAttribute("type", "checkbox");
@@ -44,11 +45,11 @@ const displayListItems = (arr) => {
         itemIsCompletedCheckbox.addEventListener("click", () => {
             arr[i].itemIsCompleted = !arr[i].itemIsCompleted;
         })
-        itemIsCompletedCheckBoxTd.append(itemIsCompletedCheckbox);
+        itemIsCompletedCheckBoxDiv.append(itemIsCompletedCheckbox);
 
-        const itemFields = ["itemDescription", "itemPriority", "itemDueDate", "itemNotes"];
+        const itemFields = ["itemPriority", "itemDueDate", "itemDescription", "itemNotes"];
         for (let field of itemFields) {
-            createTableCell(field, itemDataRow);
+            createListDataContainer(field, itemDataContainer);
         }
 
 
