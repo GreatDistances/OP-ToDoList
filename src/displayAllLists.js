@@ -25,19 +25,19 @@ const displayAllLists = () => {
 
             let td1 = document.createElement("div");
             td1.textContent = lists[i].listTitle;
-
-            let td2 = document.createElement("div");
-            td2.textContent = lists[i].listId;
-            td2.contentEditable="true";
-            td2.onblur = () => {
+            td1.contentEditable="true";
+            td1.onblur = () => {
                 lists[i].listTitle = td2.innerText;
             }
-            td2.addEventListener("keypress", function(e) {
+            td1.addEventListener("keypress", function(e) {
                 if (e.key === "Enter") {
                     lists[i].listTitle = td2.innerText;
                     td2.blur();
                 }
             });
+
+            let td2 = document.createElement("div");
+            td2.textContent = lists[i].listId;
 
             let deleteListBtn = document.createElement("button");
             deleteListBtn.addEventListener("click", function() {

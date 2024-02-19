@@ -24,12 +24,16 @@ body {
 .thisList {
     display: grid;
     align-items: center;
-    grid-template-columns: 60px 1fr 50px 30px;
+    grid-template-columns: 60px 1fr 55px 30px;
     padding: 15px;
     gap: 15px;
     margin: 8px 0;
     border: 1px solid grey;
     border-radius: 5px;
+}
+
+.thisList div {
+    padding: 8px;
 }
 
 .listItemsContainer {
