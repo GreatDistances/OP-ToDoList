@@ -8,16 +8,36 @@ body {
         "sidebar listItemsContainer"
 }
 
+.normal-button {
+    padding: 8px;
+    border-radius: 5px;
+}
+
 .sideBar {
     grid-area: sidebar;
-    background-color: lightpink;
+    background-color: lightgrey;
     padding: 15px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.thisList {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 60px 1fr 50px 30px;
+    padding: 15px;
+    gap: 15px;
+    margin: 8px 0;
+    border: 1px solid grey;
+    border-radius: 5px;
 }
 
 .listItemsContainer {
     grid-area: listItemsContainer;
     background-color: lightblue;
     padding: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .itemContainer {
@@ -64,7 +84,9 @@ select {
 
 .itemNotesContainer {
     display: grid;
-    grid-template-columns: 1fr;
+    align-items: center;
+    grid-template-columns: 1fr 30px;
+    gap: 8px;
 }
 
 .itemNotesContainer div {
@@ -76,4 +98,52 @@ select {
 .itemTitle {
     font-size: 1.25em;
     padding-bottom: 5px;
+}
+
+.addListDialog {
+    padding: 40px;
+    border-radius: 5px;
+}
+
+.addListDialogContainerButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.addItemDialog {
+    padding: 40px;
+    border-radius: 5px;
+}
+
+.addItemDialogContainerButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.submitListBtn, .submitItemBtn {
+    background-color: lightgreen;
+}
+
+.closeAddListDialogBtn, .closeAddItemDialogBtn {
+    background-color: pink;
+}
+
+.deleteBtn {
+    background-color: pink;
+    border-radius: 50%;
+    font-size: 1em;
+    padding: 8px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addListDialog legend, .addItemDialog legend {
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 15px;
 }

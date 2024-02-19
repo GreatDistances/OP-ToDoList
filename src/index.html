@@ -9,40 +9,47 @@
 <body>
     <div id="sideBar" class="sideBar">
         <h1>Projects</h1>
-        <button id="openAddListDialogBtn" class="openAddListDialogBtn">New Project</button>
+        <button id="openAddListDialogBtn" class="openAddListDialogBtn normal-button">New Project</button>
         <div id="listContainer" class="listContainer">
         </div>
     </div>
     <div id="listItemsContainer" class="listItemsContainer">
     </div>
     <dialog id="addListDialog" class="addListDialog">
+        <legend>NEW PROJECT</legend>
         <form id="addListForm">
-            <label for="listTitle">Project Title</label>
-            <input type="text" name="listTitle" id="listTitle"></input>
+            <label for="listTitle">Project Title</label><br>
+            <input type="text" name="listTitle" id="listTitle"></input><br><br>
         </form>
-        <button id="submitListBtn" class="submitListBtn">Create New Project</button>
-        <button id="closeAddListDialogBtn" class="closeAddListDialogBtn">Cancel</button>
+        <div class="addListDialogContainerButtons">
+        <button id="submitListBtn" class="submitListBtn normal-button">Create</button>
+        <button id="closeAddListDialogBtn" class="closeAddListDialogBtn normal-button">Cancel</button>
+        </div>
     </dialog>
     <dialog id="addItemDialog" class="addItemDialog">
+
         <form id="addItemForm">
-            <label for="itemTitle">Title</label>
-            <input type="text" name="itemTitle" id="itemTitle"></input>
-            <label for="itemTitle">Description</label>
-            <input type="text" name="itemDescription" id="itemDescription"></input>
-            <label for="itemDueDate">Due Date</label>
-            <input type="text" name="itemDueDate" id="itemDueDate"></input>
-            <label for="itemPriority">Priority</label>
+            <legend>NEW TASK</legend>
+            <label for="itemTitle">Title</label><br>
+            <input type="text" name="itemTitle" id="itemTitle"></input><br><br>
+            <label for="itemTitle">Description</label><br>
+            <input type="text" name="itemDescription" id="itemDescription"></input><br><br>
+            <label for="itemDueDate">Due Date</label><br>
+            <input type="text" name="itemDueDate" id="itemDueDate"></input><br><br>
+            <label for="itemPriority">Priority</label><br>
             <select name="itemPriority" id="itemPriority">
                 <option value=""></option>
                 <option value="!">!</option>
                 <option value="!!">!!</option>
                 <option value="!!!">!!!</option>
-            </select>
-            <label for="itemNotes">Notes</label>
-            <input type="text" name="itemNotes" id="itemNotes"></input>
+            </select><br><br>
+            <label for="itemNotes">Notes</label><br>
+            <input type="text" name="itemNotes" id="itemNotes"></input><br><br>
         </form>
-        <button id="submitItemBtn" class="submitItemBtn">Create New Item</button>
-        <button id="closeAddItemDialogBtn" class="closeAddItemDialogBtn">Cancel</button>
+        <div class="addItemDialogContainerButtons">
+        <button id="submitItemBtn" class="submitItemBtn normal-button">Create</button>
+        <button id="closeAddItemDialogBtn" class="closeAddItemDialogBtn normal-button">Cancel</button>
+    </div>
     </dialog>
     <script src="index.js" type="module"></script>
 </body>

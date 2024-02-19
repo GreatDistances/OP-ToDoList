@@ -11,21 +11,23 @@ const displayAllLists = () => {
     //console.log(listsDisplay);
 
     for (let i = 0; i < lists.length; i++) {
-        let tr = document.createElement("tr");
-        listContainer.append(tr);
+        let thisList = document.createElement("div");
+        listContainer.append(thisList);
+        thisList.classList.add("thisList");
 
             let viewListBtn = document.createElement("button");
             viewListBtn.innerText = "View";
+            viewListBtn.classList.add("normal-button");
             viewListBtn.addEventListener("click", () => {
                 displayList(lists[i].listId);
             })
-            tr.append(viewListBtn);
+            thisList.append(viewListBtn);
 
-            let td1 = document.createElement("td");
-            td1.textContent = lists[i].listId;
+            let td1 = document.createElement("div");
+            td1.textContent = lists[i].listTitle;
 
-            let td2 = document.createElement("td");
-            td2.textContent = lists[i].listTitle;
+            let td2 = document.createElement("div");
+            td2.textContent = lists[i].listId;
             td2.contentEditable="true";
             td2.onblur = () => {
                 lists[i].listTitle = td2.innerText;
@@ -41,9 +43,10 @@ const displayAllLists = () => {
             deleteListBtn.addEventListener("click", function() {
                 deleteList(lists[i].listId)
             });
-            deleteListBtn.innerText = "Delete";
+            deleteListBtn.classList.add("deleteBtn")
+            deleteListBtn.innerText = "X";
 
-            tr.append(td1, td2, deleteListBtn);
+            thisList.append(td1, td2, deleteListBtn);
     }
 }
 

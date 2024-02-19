@@ -94,14 +94,13 @@ const displayListItems = (arr) => {
         createSelectField("itemPriority", itemSubSubContainer);
         createTextField("itemNotes", itemNotesContainer);
 
-
-
-
-        const deleteBtn = document.createElement("button");
-        deleteBtn.innerText = "Delete";
-        deleteBtn.addEventListener("click", () => {
+        const deleteItemBtn = document.createElement("button");
+        deleteItemBtn.innerText = "X";
+        deleteItemBtn.classList.add("deleteBtn");
+        deleteItemBtn.addEventListener("click", () => {
             deleteItem(arr[i].itemId);
         })
+        itemNotesContainer.append(deleteItemBtn);
     }
 }
 

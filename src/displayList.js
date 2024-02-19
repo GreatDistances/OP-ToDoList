@@ -13,12 +13,13 @@ const displayList = (id) => {
 
     setCurrentListId(id);
     
-    const titleTd = document.createElement("h2");
+    const titleTd = document.createElement("h1");
     let displayTitle;
     listItemsContainer.append(titleTd);
 
     const addItemDialog = document.querySelector("#addItemDialog");
     const openItemDialogBtn = document.createElement("button");
+    openItemDialogBtn.classList.add("normal-button");
     openItemDialogBtn.innerText = "Add a task";
     openItemDialogBtn.addEventListener("click", () => {
         addItemDialog.showModal();
@@ -31,7 +32,7 @@ const displayList = (id) => {
             return;
         }
         if (lists[i].listId === id) {
-            displayTitle = lists[i].listTitle
+            displayTitle = `Project: ${lists[i].listTitle}`
             titleTd.innerText = displayTitle;
             if (lists[i].listItems.length > 0) {
                 displayListItems(lists[i].listItems);
