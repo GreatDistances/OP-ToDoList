@@ -20,18 +20,60 @@ body {
     padding: 15px;
 }
 
-.item {
-    padding: 10px;
-    border: 2px solid;
+.itemContainer {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 12px;
+    margin: 8px 0;
+}
+
+.itemIsCompletedCheckBoxDiv {
+    display: flex;
+    align-items: center;
+}
+
+.itemSubContainer {
+    display: grid;
+    gap: 8px;
+}
+
+.itemSubSubContainer {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 1fr 1.5fr 125px 50px;
+}
+
+.itemSubSubContainer div {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+input, select {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+select {
+    text-align: center;
+}
+
+.itemNotesContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.itemNotesContainer div {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 8px;
 }
 
 .itemTitle {
     font-size: 1.25em;
     padding-bottom: 5px;
-}
-
-.itemDataContainer {
-    display: grid;
-    grid-template-columns: 20px 20px 80px 2fr 1fr;
-    gap: 10px;
 }

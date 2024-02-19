@@ -6,16 +6,34 @@ const displayListItems = (arr) => {
     for (let i = 0; i < arr.length; i++) {
         console.log(arr[i].itemTitle);
 
-        const item = document.createElement("div");
-        item.classList.add("item");
-        const itemTitle = document.createElement("div");
-        itemTitle.classList.add("itemTitle");
-        const itemDataContainer = document.createElement("div");
-        itemDataContainer.classList.add("itemDataContainer");
+        // parent of itemIsCompletedCheckBoxDiv and itemSubContainer
+        const itemContainer = document.createElement("div");
+        itemContainer.classList.add("itemContainer");
 
-        const createListDataContainer = (text, container) => {
+        // child of itemContainer, sibling of itemSubSubContainer
+        const itemIsCompletedCheckBoxDiv = document.createElement("div");
+        itemIsCompletedCheckBoxDiv.classList.add("itemIsCompletedCheckBoxDiv");
+        itemContainer.append(itemIsCompletedCheckBoxDiv);
+
+        // child of itemContainer, parent of itemSubSubContainer and itemNotesContainer
+        const itemSubContainer = document.createElement("div");
+        itemSubContainer.classList.add("itemSubContainer");
+        itemContainer.append(itemSubContainer);
+
+        // child of itemContainer, sibling of itemNotesContainer
+        const itemSubSubContainer = document.createElement("div");
+        itemSubSubContainer.classList.add("itemSubSubContainer");
+        itemSubContainer.append(itemSubSubContainer);
+
+        // child of itemContainer, sibling of itemSubSubContainer
+        const itemNotesContainer = document.createElement("div");
+        itemNotesContainer.classList.add("itemNotesContainer");
+        itemSubContainer.append(itemNotesContainer);
+
+        const createTextField = (text, container) => {
+            const value = arr[i][text];
             const cell = document.createElement("div");
-            cell.innerText = arr[i][text];
+            cell.innerText = value ? value : cell.placeholder = text.slice(4);
             container.append(cell);
             cell.contentEditable="true";
             cell.onblur = () => {
@@ -29,15 +47,34 @@ const displayListItems = (arr) => {
             });
             container.append(cell);
         }
+        
+        const createDateField = (text, container) => {
+            const value = arr[i][text];
+            const cell = document.createElement("INPUT");
+            cell.setAttribute("type", "date");
+            cell.innerText = value;
+            container.append(cell);
+        }
 
-        listItemsContainer.append(item);
-        item.append(itemTitle);
-        item.append(itemDataContainer);
+        const createSelectField = (text, container) => {
+            const value = arr[i][text];
+            const cell = document.createElement("select");
 
-        createListDataContainer("itemTitle", itemTitle);
+            const optArr = ["", "!", "!!", "!!!"];
+            for (let i = 0; i < optArr.length; i++) {
+                const opt = document.createElement("option");
+                opt.value = optArr[i];
+                opt.text = optArr[i];
+                cell.appendChild(opt);
+            }
+            cell.value = value;
+            cell.onblur = () => {
+                arr[i][text] = cell.value;
+            }
+            container.append(cell);
+        }
 
-        const itemIsCompletedCheckBoxDiv = document.createElement("div");
-        itemDataContainer.append(itemIsCompletedCheckBoxDiv);
+        listItemsContainer.append(itemContainer);
 
         const itemIsCompletedCheckbox = document.createElement("INPUT");
         itemIsCompletedCheckbox.setAttribute("type", "checkbox");
@@ -47,10 +84,17 @@ const displayListItems = (arr) => {
         })
         itemIsCompletedCheckBoxDiv.append(itemIsCompletedCheckbox);
 
-        const itemFields = ["itemPriority", "itemDueDate", "itemDescription", "itemNotes"];
-        for (let field of itemFields) {
-            createListDataContainer(field, itemDataContainer);
-        }
+/*         const itemTextFields = ["itemTitle", "itemDescription", "itemPriority"];
+        for (let field of itemTextFields) {
+            createTextField(field, itemSubSubContainer);
+        } */
+        createTextField("itemTitle", itemSubSubContainer);
+        createTextField("itemDescription", itemSubSubContainer);
+        createDateField("itemDate", itemSubSubContainer);
+        createSelectField("itemPriority", itemSubSubContainer);
+        createTextField("itemNotes", itemNotesContainer);
+
+
 
 
         const deleteBtn = document.createElement("button");
