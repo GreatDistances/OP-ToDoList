@@ -1,22 +1,37 @@
 import displayAllLists from './displayAllLists.js'
 import {displayList} from './displayList.js';
 
-const lists = [];
-/*     {
+const lists = [
+     {
         listId: "L98",
         listTitle: "Test List A",
         listItems: [
             {
                 "itemId": "I1",
                 "itemTitle": "Item title for I1 asdf",
-                "description": "this description",
-                "dueDate": "a due date",
-                "priority": 3,
-                "notes": "some notes here",
+                "itemDescription": "this description",
+                "itemDueDate": "2024-01-01",
+                "itemPriority": "!!!",
+                "itemNotes": "some notes here",
+                "itemIsCompleted": true
         },
         {
             "itemId": "I2",
-            "itemTitle": "Item title for I2 wert"
+            "itemTitle": "Item title for I2 wert",
+            "itemDescription": "this description",
+            "itemDueDate": "2024-02-02",
+            "itemPriority": "!",
+            "itemNotes": "some notes here",
+            "itemIsCompleted": false
+        },
+                {
+            "itemId": "I2A",
+            "itemTitle": "Item title for I2A 444",
+            "itemDescription": "this description",
+            "itemDueDate": "2023-12-31",
+            "itemPriority": "",
+            "itemNotes": "notes here",
+            "itemIsCompleted": true
         }
         ]
     },
@@ -37,9 +52,13 @@ const lists = [];
         "itemTitle": "Item title for I5"
     }]
     }
-]; */
+];
 
 let currentListId = -1;
+
+function getLists() {
+    return lists;
+}
 
 function setCurrentListId(num) {
     currentListId = num;
@@ -98,4 +117,4 @@ const deleteList = (id) => {
     }
 }
 
-export {lists, addNewList, deleteList, setCurrentListId, getCurrentListId, getCurrentListIndex, getItemIndex, getListsLength}
+export {lists, getLists, addNewList, deleteList, setCurrentListId, getCurrentListId, getCurrentListIndex, getItemIndex, getListsLength}

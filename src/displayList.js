@@ -1,9 +1,13 @@
-import {lists, getCurrentListId, setCurrentListId, getListsLength } from './lists.js';
+import {lists, getCurrentListId, setCurrentListId, getCurrentListIndex, getListsLength } from './lists.js';
 import displayListItems from './displayListItem.js';
 import { addItem } from './addItem.js';
 import { createListItem } from './createListItem.js';
 
+let sortFlag = "";
+
 const displayList = (id) => {
+
+    const listItemsContainer = document.querySelector("#listItemsContainer");
     
     listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
     if (!id || id === -1) {
@@ -12,10 +16,18 @@ const displayList = (id) => {
     }
 
     setCurrentListId(id);
-    
+
     const titleTd = document.createElement("h1");
     let displayTitle;
     listItemsContainer.append(titleTd);
+
+
+
+    const listItemBtnDivContainer = document.createElement("div");
+    listItemBtnDivContainer.classList.add("listItemBtnDivContainer");
+
+    const listItemSortBtnDiv = document.createElement("div");
+    listItemSortBtnDiv.classList.add("listItemSortBtnDiv");
 
     const addItemDialog = document.querySelector("#addItemDialog");
     const openItemDialogBtn = document.createElement("button");
@@ -24,7 +36,58 @@ const displayList = (id) => {
     openItemDialogBtn.addEventListener("click", () => {
         addItemDialog.showModal();
     })
-    listItemsContainer.append(openItemDialogBtn);
+    listItemBtnDivContainer.append(openItemDialogBtn);
+
+    const sortByDateBtn = document.createElement("button");
+    sortByDateBtn.classList.add("normal-button");
+    sortByDateBtn.innerText = "Sort By Date";
+    listItemsContainer.append(sortByDateBtn);
+    sortByDateBtn.addEventListener("click", () => {
+        if (sortFlag !== "itemDueDateAsc") {
+            sortFlag = "itemDueDateAsc";
+            sortItemsDesc("itemDueDate");
+        } else if (sortFlag === "itemDueDateAsc") {
+            sortItemsAsc("itemDueDate");
+            sortFlag = "itemDueDateDesc";
+        };
+        displayList(getCurrentListId());
+    });
+    listItemSortBtnDiv.append(sortByDateBtn);
+
+    const sortByPriorityBtn = document.createElement("button");
+    sortByPriorityBtn.classList.add("normal-button");
+    sortByPriorityBtn.innerText = "Sort By Priority";
+    listItemsContainer.append(sortByPriorityBtn);
+    sortByPriorityBtn.addEventListener("click", () => {
+        if (sortFlag !== "itemPriorityDesc") {
+            sortFlag = "itemPriorityDesc";
+            sortItemsDesc("itemPriority");
+        } else if (sortFlag === "itemPriorityDesc") {
+            sortItemsAsc("itemPriority");
+            sortFlag = "itemPriorityAsc";
+        };
+        displayList(getCurrentListId());
+    });
+    listItemSortBtnDiv.append(sortByPriorityBtn);
+
+    const sortByItemIsCompletedBtn = document.createElement("button");
+    sortByItemIsCompletedBtn.classList.add("normal-button");
+    sortByItemIsCompletedBtn.innerText = "Sort By Completion";
+    listItemsContainer.append(sortByItemIsCompletedBtn);
+    sortByItemIsCompletedBtn.addEventListener("click", () => {
+        if (sortFlag !== "itemIsCompletedAsc") {
+            sortFlag = "itemIsCompletedAsc";
+            sortItemsAsc("itemIsCompleted");
+        } else if (sortFlag === "itemIsCompletedAsc") {
+            sortItemsDesc("itemIsCompleted");
+            sortFlag = "itemIsCompletedDesc";
+        };
+        displayList(getCurrentListId());
+    });
+    listItemSortBtnDiv.append(sortByItemIsCompletedBtn);
+
+    listItemBtnDivContainer.append(listItemSortBtnDiv);
+    listItemsContainer.append(listItemBtnDivContainer);
 
     for (let i = 0; i < lists.length; i++) {
         if (getListsLength === 0) {
@@ -41,6 +104,8 @@ const displayList = (id) => {
         }
     }
 }
+
+
 
 const closeAddItemDialogBtn = document.querySelector("#closeAddItemDialogBtn");
 closeAddItemDialogBtn.addEventListener("click", () => {
@@ -61,5 +126,39 @@ submitItemBtn.addEventListener("click", () => {
     addItemDialog.close();
     addItemForm.reset();
 });
+
+const sortItemsAsc = (text) => {
+    const currentIndex = getCurrentListIndex();
+    let sortedItems = lists[currentIndex].listItems;
+    sortedItems = sortedItems.sort((a,b) => {
+        if (a[text] < b[text]) {
+            return -1
+        } else if (a[text] > b[text]) {
+            return 1;
+        }
+        return 0;
+    });
+    sortedItems.forEach((listItem) =>  {
+        console.log(listItem);
+    });   
+    return sortedItems;
+}
+
+const sortItemsDesc = (text) => {
+    const currentIndex = getCurrentListIndex();
+    let sortedItems = lists[currentIndex].listItems;
+    sortedItems = sortedItems.sort((a,b) => {
+        if (b[text] < a[text]) {
+            return -1
+        } else if (b[text] > a[text]) {
+            return 1;
+        }
+        return 0;
+    });
+    sortedItems.forEach((listItem) =>  {
+        console.log(listItem);
+    });   
+    return sortedItems;
+}
 
 export {displayList}

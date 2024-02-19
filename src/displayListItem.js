@@ -32,9 +32,12 @@ const displayListItems = (arr) => {
 
         const createTextField = (text, container) => {
             const value = arr[i][text];
+            const cellContainer = document.createElement("div");
             const cell = document.createElement("div");
-            cell.innerText = value ? value : cell.placeholder = text.slice(4);
-            container.append(cell);
+            const label = document.createElement("label");
+            cell.innerText = value;
+            label.classList.add("listItemLabel");
+            label.innerText = text.slice(4);
             cell.contentEditable="true";
             cell.onblur = () => {
                 arr[i][text] = cell.innerText;
@@ -45,7 +48,9 @@ const displayListItems = (arr) => {
                     cell.blur();
                 }
             });
-            container.append(cell);
+            cellContainer.append(cell);
+            cellContainer.append(label);
+            container.append(cellContainer);
         }
         
         const createDateField = (text, container) => {
@@ -100,7 +105,7 @@ const displayListItems = (arr) => {
         deleteItemBtn.addEventListener("click", () => {
             deleteItem(arr[i].itemId);
         })
-        itemNotesContainer.append(deleteItemBtn);
+        itemSubSubContainer.append(deleteItemBtn);
     }
 }
 
