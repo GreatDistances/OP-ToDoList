@@ -50,9 +50,13 @@ const displayListItems = (arr) => {
         
         const createDateField = (text, container) => {
             const value = arr[i][text];
+            console.log(value);
             const cell = document.createElement("INPUT");
             cell.setAttribute("type", "date");
-            cell.innerText = value;
+            cell.value = value;
+            cell.onblur = () => {
+                arr[i][text] = cell.value;
+            }
             container.append(cell);
         }
 
@@ -84,13 +88,9 @@ const displayListItems = (arr) => {
         })
         itemIsCompletedCheckBoxDiv.append(itemIsCompletedCheckbox);
 
-/*         const itemTextFields = ["itemTitle", "itemDescription", "itemPriority"];
-        for (let field of itemTextFields) {
-            createTextField(field, itemSubSubContainer);
-        } */
         createTextField("itemTitle", itemSubSubContainer);
         createTextField("itemDescription", itemSubSubContainer);
-        createDateField("itemDate", itemSubSubContainer);
+        createDateField("itemDueDate", itemSubSubContainer);
         createSelectField("itemPriority", itemSubSubContainer);
         createTextField("itemNotes", itemNotesContainer);
 
