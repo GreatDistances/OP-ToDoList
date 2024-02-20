@@ -18,8 +18,8 @@
     <dialog id="addListDialog" class="addListDialog">
         <legend>NEW PROJECT</legend>
         <form id="addListForm">
-            <label for="listTitle">Project Title</label><br>
-            <input type="text" name="listTitle" id="listTitle"></input><br><br>
+            <input type="text" name="listTitle" id="listTitle"></input><br>
+            <label for="listTitle">Project Title</label><br><br>
         </form>
         <div class="addListDialogContainerButtons">
         <button id="submitListBtn" class="submitListBtn normal-button">Create</button>
@@ -30,21 +30,21 @@
 
         <form id="addItemForm">
             <legend>NEW TASK</legend>
-            <label for="itemTitle">Title</label><br>
-            <input type="text" name="itemTitle" id="itemTitle"></input><br><br>
-            <label for="itemTitle">Description</label><br>
-            <input type="text" name="itemDescription" id="itemDescription"></input><br><br>
-            <label for="itemDueDate">Due Date</label><br>
-            <input type="date" name="itemDueDate" id="itemDueDate"></input><br><br>
-            <label for="itemPriority">Priority</label><br>
+            <input type="text" name="itemTitle" id="itemTitle"></input><br>
+            <label for="itemTitle">Title</label><br><br>
+            <input type="text" name="itemDescription" id="itemDescription"></input><br>
+            <label for="itemTitle">Description</label><br><br>
+            <input type="date" name="itemDueDate" id="itemDueDate"></input><br>
+            <label for="itemDueDate">Due Date</label><br><br>
             <select name="itemPriority" id="itemPriority">
                 <option value=""></option>
                 <option value="!">!</option>
                 <option value="!!">!!</option>
                 <option value="!!!">!!!</option>
-            </select><br><br>
-            <label for="itemNotes">Notes</label><br>
-            <input type="text" name="itemNotes" id="itemNotes"></input><br><br>
+            </select><br>
+            <label for="itemPriority">Priority</label><br><br>
+            <input type="text" name="itemNotes" id="itemNotes"></input><br>
+            <label for="itemNotes">Notes</label><br><br>
         </form>
         <div class="addItemDialogContainerButtons">
         <button id="submitItemBtn" class="submitItemBtn normal-button">Create</button>

@@ -9,6 +9,10 @@ body {
         "sidebar listItemsContainer"
 }
 
+h1 {
+    font-size: 1.75em;
+}
+
 .normal-button {
     padding: 8px;
     border-radius: 5px;
@@ -20,12 +24,13 @@ body {
     padding: 15px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    position: sticky;
 }
 
 .thisList {
     display: grid;
     align-items: center;
-    grid-template-columns: 50px 1fr 55px 30px;
+    grid-template-columns: 50px 1fr 30px;
     padding: 15px;
     gap: 15px;
     margin: 8px 0;
@@ -35,6 +40,10 @@ body {
 }
 
 .thisList div {
+    border-bottom: 1px solid grey;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     padding: 8px;
 }
 
@@ -56,6 +65,11 @@ body {
     justify-content: space-between;
 }
 
+.listItemSortBtnDiv {
+    display: flex;
+    gap: 8px;
+}
+
 .itemContainer {
     display: grid;
     grid-template-columns: 30px 1fr;
@@ -72,9 +86,14 @@ body {
     gap: 8px;
 }
 
+.itemIsCompletedCheckBoxDiv {
+    display: flex;
+    justify-content: center;
+}
+
 input[type="checkbox"] {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
 }
 
 .itemSubSubContainer {
@@ -99,10 +118,8 @@ input[type="checkbox"] {
 
 .listItemLabel {
     font-size: 0.8em;
-}
-
-select {
-    text-align: center;
+    padding-left: 8px;
+    color: #888888;
 }
 
 .itemNotesContainer {
@@ -127,6 +144,14 @@ select {
     border-radius: 5px;
 }
 
+.addListDialog input {
+    border-bottom: 1px solid grey;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 8px;
+}
+
 .addListDialogContainerButtons {
     display: flex;
     justify-content: flex-end;
@@ -136,6 +161,15 @@ select {
 .addItemDialog {
     padding: 40px;
     border-radius: 5px;
+}
+
+.addItemDialog input, .addItemDialog select {
+    border-bottom: 1px solid grey;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 200px;
+    padding: 8px;
 }
 
 .addItemDialogContainerButtons {

@@ -36,9 +36,6 @@ const displayAllLists = () => {
                 }
             });
 
-            let td2 = document.createElement("div");
-            td2.textContent = lists[i].listId;
-
             let deleteListBtn = document.createElement("button");
             deleteListBtn.addEventListener("click", function() {
                 deleteList(lists[i].listId)
@@ -46,7 +43,7 @@ const displayAllLists = () => {
             deleteListBtn.classList.add("deleteBtn")
             deleteListBtn.innerText = "X";
 
-            thisList.append(td1, td2, deleteListBtn);
+            thisList.append(td1, deleteListBtn);
     }
 }
 

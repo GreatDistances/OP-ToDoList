@@ -7,11 +7,14 @@ let sortFlag = "";
 
 const displayList = (id) => {
 
+
     const listItemsContainer = document.querySelector("#listItemsContainer");
     
     listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
     if (!id || id === -1) {
-        listItemsContainer.innerText = "Add or Select a Project";
+        const noListSelected = document.createElement("h1");
+        noListSelected.innerText = "Add or Select a Project";
+        listItemsContainer.append(noListSelected);
         return;
     }
 
@@ -20,8 +23,6 @@ const displayList = (id) => {
     const titleTd = document.createElement("h1");
     let displayTitle;
     listItemsContainer.append(titleTd);
-
-
 
     const listItemBtnDivContainer = document.createElement("div");
     listItemBtnDivContainer.classList.add("listItemBtnDivContainer");

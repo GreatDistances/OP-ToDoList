@@ -55,32 +55,44 @@ const displayListItems = (arr) => {
         
         const createDateField = (text, container) => {
             const value = arr[i][text];
-            console.log(value);
+            const cellContainer = document.createElement("div");
             const cell = document.createElement("INPUT");
+            const label = document.createElement("label");
+            label.classList.add("listItemLabel");
+            label.innerText = "Due Date";
             cell.setAttribute("type", "date");
             cell.value = value;
             cell.onblur = () => {
                 arr[i][text] = cell.value;
             }
-            container.append(cell);
+            cellContainer.append(cell);
+            cellContainer.append(label);
+            container.append(cellContainer);
         }
 
         const createSelectField = (text, container) => {
             const value = arr[i][text];
+            const cellContainer = document.createElement("div");
             const cell = document.createElement("select");
-
+            const label = document.createElement("label");
+            label.classList.add("listItemLabel");
+            label.innerText = text.slice(4);
             const optArr = ["", "!", "!!", "!!!"];
             for (let i = 0; i < optArr.length; i++) {
                 const opt = document.createElement("option");
                 opt.value = optArr[i];
                 opt.text = optArr[i];
+                cell.style.fontWeight = "bold";
                 cell.appendChild(opt);
             }
+
             cell.value = value;
             cell.onblur = () => {
                 arr[i][text] = cell.value;
             }
-            container.append(cell);
+            cellContainer.append(cell);
+            cellContainer.append(label);
+            container.append(cellContainer);
         }
 
         listItemsContainer.append(itemContainer);
@@ -91,6 +103,7 @@ const displayListItems = (arr) => {
         itemIsCompletedCheckbox.addEventListener("click", () => {
             arr[i].itemIsCompleted = !arr[i].itemIsCompleted;
         })
+        itemIsCompletedCheckBoxDiv.classList.add("itemIsCompletedCheckBoxDiv");
         itemIsCompletedCheckBoxDiv.append(itemIsCompletedCheckbox);
 
         createTextField("itemTitle", itemSubSubContainer);
