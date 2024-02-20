@@ -70,14 +70,28 @@ h1 {
     gap: 8px;
 }
 
-.itemContainer {
-    display: grid;
-    grid-template-columns: 30px 1fr;
+.itemContainerNoTasks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 15px;
     border: 1px solid;
     border-radius: 5px;
     padding: 12px;
     margin: 8px 0;
+    background-color: white;
+    border: 1px solid grey;
+    height: 40px;
+}
+
+.itemContainer {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 15px;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid grey;
+    border-radius: 5px;
     background-color: white;
 }
 
@@ -182,12 +196,7 @@ input[type="checkbox"] {
     background-color: lightgreen;
 }
 
-.closeAddListDialogBtn, .closeAddItemDialogBtn {
-    background-color: pink;
-}
-
 .deleteBtn {
-    background-color: pink;
     border-radius: 50%;
     font-size: 1em;
     padding: 8px;

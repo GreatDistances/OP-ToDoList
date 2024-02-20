@@ -3,8 +3,8 @@ import List from './list.js';
 import displayAllLists from './displayAllLists.js';
 import {displayList} from './displayList.js';
 
-const listManager = new ListManager();
-
+// INITIALIZE APP
+const listManager = new ListManager(); // new instance of ListManager class
 listManager.setCurrentListId(-1); // initialize app with no list selected
 displayAllLists(); // display all available lists
 displayList(listManager.getCurrentListId()); // initialize app with no list displayed
@@ -28,7 +28,6 @@ submitListBtn.addEventListener("click", () => {
     listManager.addNewList(List.createList(newListName));
     addListForm.reset();
     addListDialog.close();
-    displayList(listManager.getCurrentListId());
 });
 
 export { listManager };

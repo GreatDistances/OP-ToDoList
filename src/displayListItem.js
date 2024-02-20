@@ -2,7 +2,12 @@ import { listManager } from './index.js';
 
 const listItemsContainer = document.querySelector("#listItemsContainer");
 
-const displayListItems = (arr) => {
+const displayListItems = (id) => {
+
+    const arr = [...listManager.getListItems(id)];
+
+    arr.forEach((item) => console.log(item));
+
     for (let i = 0; i < arr.length; i++) {
 
         // parent of itemIsCompletedCheckBoxDiv and itemSubContainer
@@ -29,10 +34,11 @@ const displayListItems = (arr) => {
         itemNotesContainer.classList.add("itemNotesContainer");
         itemSubContainer.append(itemNotesContainer);
 
-            listItemsContainer.append(itemContainer);
+        listItemsContainer.append(itemContainer);
 
-        const createTextField = (text, container) => {
+        const createTextField = (text, container, method) => {
             const value = arr[i][text];
+            const enterKeyPressed = false;
             const cellContainer = document.createElement("div");
             const cell = document.createElement("div");
             const label = document.createElement("label");
@@ -40,16 +46,21 @@ const displayListItems = (arr) => {
             label.classList.add("listItemLabel");
             label.innerText = text.slice(4);
             cell.contentEditable="true";
-            cell.onblur = () => {
-                arr[i][text] = cell.innerText;
-            }
             cell.addEventListener("keypress", function(e) {
                 if (e.key === "Enter") {
-                    arr[i][text] = cell.innerText;
+                    cell.innerText
+                    listManager[method](arr[i].itemId, cell.innerText);//arr[i][text] = cell.innerText;
                     cell.blur();
                     e.preventDefault()
                 }
             });
+            cell.onblur = () => {
+                if (enterKeyPressed) {
+                    enterKeyPressed = false;
+                    return;
+                }
+                listManager[method](arr[i].itemId, cell.innerText);//arr[i][text] = cell.innerText;
+            }
             cellContainer.append(cell);
             cellContainer.append(label);
             container.append(cellContainer);
@@ -106,11 +117,11 @@ const displayListItems = (arr) => {
         itemIsCompletedCheckBoxDiv.classList.add("itemIsCompletedCheckBoxDiv");
         itemIsCompletedCheckBoxDiv.append(itemIsCompletedCheckbox);
 
-        createTextField("itemTitle", itemSubSubContainer);
-        createTextField("itemDescription", itemSubSubContainer);
-        createDateField("itemDueDate", itemSubSubContainer);
-        createSelectField("itemPriority", itemSubSubContainer);
-        createTextField("itemNotes", itemNotesContainer);
+        createTextField("itemTitle", itemSubSubContainer, "setItemTitle");
+        createTextField("itemDescription", itemSubSubContainer, "setItemDescription");
+        createDateField("itemDueDate", itemSubSubContainer, "setItemDueDate");
+        createSelectField("itemPriority", itemSubSubContainer, "setItemPriority");
+        createTextField("itemNotes", itemNotesContainer, "setItemNotes");
 
         const deleteItemBtn = document.createElement("button");
         deleteItemBtn.innerText = "X";
@@ -120,7 +131,6 @@ const displayListItems = (arr) => {
         })
         itemSubSubContainer.append(deleteItemBtn);
     }
-
 }
 
 export default displayListItems;

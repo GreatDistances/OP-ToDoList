@@ -44,7 +44,6 @@ class ListManager {
     this.currentListId = -1;
   }
     getAllLists() {
-      console.log(this.listRepository);
       return this.listRepository;
     }
     
@@ -68,6 +67,14 @@ class ListManager {
       return index;
     };
 
+    findListIndex(listId) {
+      const index = this.listRepository.map((e) => e.listId).indexOf(listId);
+      if (index === -1) {
+        console.log(`List ID# ${listId} not found, no list index available`);
+      }
+      return index;
+    }
+
     addNewList(listObj) {
       this.listRepository.push(listObj);
       displayAllLists();
@@ -76,7 +83,7 @@ class ListManager {
     };
 
     deleteList(id) {
-      const index = this.listRepository.findIndex(list => list.listId === id);
+      const index = this.findListIndex(id);
      index !== -1
         ? (this.listRepository.splice(index, 1),
           console.log(`List ID# ${id} deleted`))
@@ -110,21 +117,17 @@ class ListManager {
   }
 
   getListTitle(listId) {
-    if (listId === -1) {
-      return;
-    }
-    const index = this.listRepository.map((e) => e.listId).indexOf(listId);
+    const index = this.findListIndex(listId);
     const title = this.listRepository[index].listTitle;
     return title;
   };
 
     setListTitle(listId, newTitle) {
-      const index = this.listRepository.map((e) => e.listId).indexOf(listId);
+      const index = this.findListIndex(listId);
       if (index === -1) {
         return;
       }
-      if (this.listRepository[index].listTitle === newTitle) {
-        console.log("New entered title same as prior, no changes");
+      if (this.listRepository[index].listTitle === newTitle) { // if no change in title, return
         return;
       }
       this.listRepository[index].listTitle = newTitle;
@@ -132,23 +135,72 @@ class ListManager {
       console.log(this.listRepository);
     };
 
-    // TODO:  getters and setters for all listItem fields, and related code in DOM manipulation files.
-
-
     getListItemIndex(currentItemId) {
       const listIndex = this.getCurrentListIndex();
       if (listIndex === -1) {
-        return -1;
+          return -1;
       }
-      const list = this.listRepository[listIndex];
-      if (!list.listItems) {
-        return -1;
+      const list = this.listRepository[listIndex].listItems;
+      if (!list) {
+          return -1;
       }
-      const itemIndex = list.listItems.findIndex(
-        (item) => item.itemId === currentItemId
+      const itemIndex = list.findIndex(
+          (item) => item.itemId === currentItemId
       );
       return itemIndex;
+  }
+
+
+
+
+    getListItems(listId) {
+      const index = this.findListIndex(listId);
+      const listItemsArr = this.listRepository[index].listItems;
+      if (listItemsArr.length < 1) {
+        return -1;
+      }
+      return listItemsArr;
     };
+
+    setItemTitle(itemId, newTitle) {
+      const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+      const itemIndex = this.getListItemIndex(itemId);
+      if (listIndex !== -1 && itemIndex !== -1) {
+        this.listRepository[listIndex].listItems[itemIndex].itemTitle = newTitle;
+      }
+    }
+  
+    setItemDescription(itemId, newDescription) {
+      const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+      const itemIndex = this.getListItemIndex(itemId);
+      if (listIndex !== -1 && itemIndex !== -1) {
+        this.listRepository[listIndex].listItems[itemIndex].itemDescription = newDescription;
+      }
+    }
+  
+    setItemDueDate(itemId, newDueDate) {
+      const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+      const itemIndex = this.getListItemIndex(itemId);
+      if (listIndex !== -1 && itemIndex !== -1) {
+        this.listRepository[listIndex].listItems[itemIndex].itemDueDate = newDueDate;
+      }
+    }
+  
+    setItemPriority(itemId, newPriority) {
+      const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+      const itemIndex = this.getListItemIndex(itemId);
+      if (listIndex !== -1 && itemIndex !== -1) {
+        this.listRepository[listIndex].listItems[itemIndex].itemPriority = newPriority;
+      }
+    }
+  
+    setItemNotes(itemId, newNotes) {
+      const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+      const itemIndex = this.getListItemIndex(itemId);
+      if (listIndex !== -1 && itemIndex !== -1) {
+        this.listRepository[listIndex].listItems[itemIndex].itemNotes = newNotes;
+      }
+    }
 }
 
 export default ListManager;

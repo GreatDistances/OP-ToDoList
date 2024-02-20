@@ -4,14 +4,15 @@ import { createListItem } from './createListItem.js';
 
 let sortFlag = "";
 
-
 const displayList = (id) => {
 
-    const lists = listManager.getAllLists();
+    const lists = [...listManager.getAllLists()];
 
     const listItemsContainer = document.querySelector("#listItemsContainer");
     
     listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
+
+    // if no listId is selected, display text that requests user add or select a project
     if (!id || id === -1) {
         const noListSelected = document.createElement("h1");
         noListSelected.innerText = "Add or Select a Project";
@@ -97,17 +98,19 @@ const displayList = (id) => {
             return;
         }
         if (lists[i].listId === id) {
-            displayTitle = `Project: ${lists[i].listTitle}`
+            displayTitle = `Project: ${lists[i].listTitle}`;
             titleTd.innerText = displayTitle;
             if (lists[i].listItems.length > 0) {
-                displayListItems(lists[i].listItems);
-                console.log(lists[i].listItems);
+                displayListItems(id);
+            } else {
+                const noTasksMessage = document.createElement("div");
+                noTasksMessage.classList.add("itemContainerNoTasks");
+                noTasksMessage.innerText = "There are currently no tasks in this project.";
+                listItemsContainer.append(noTasksMessage);
             }
         }
     }
 }
-
-
 
 const closeAddItemDialogBtn = document.querySelector("#closeAddItemDialogBtn");
 closeAddItemDialogBtn.addEventListener("click", () => {
@@ -124,18 +127,18 @@ submitItemBtn.addEventListener("click", () => {
     const newItemDueDate = document.querySelector("#itemDueDate").value;
     const newItemNotes = document.querySelector("#itemNotes").value;
     listManager.addItem(createListItem(newItemName, newItemDescription, newItemPriority, newItemDueDate, newItemNotes));
-    displayList(listManager.getCurrentListId());
+    const currentListId = listManager.getCurrentListId();
+    displayList(currentListId);
     addItemDialog.close();
     addItemForm.reset();
 });
 
 const sortItemsAsc = (text) => {
-    const lists = listManager.getAllLists();
-    const currentIndex = listManager.getCurrentListIndex();
-    let sortedItems = lists[currentIndex].listItems;
+    const currentListId = listManager.getCurrentListId();
+    let sortedItems = listManager.getListItems(currentListId);
     sortedItems = sortedItems.sort((a,b) => {
         if (a[text] < b[text]) {
-            return -1
+            return -1;
         } else if (a[text] > b[text]) {
             return 1;
         }
@@ -148,9 +151,8 @@ const sortItemsAsc = (text) => {
 }
 
 const sortItemsDesc = (text) => {
-    const lists = listManager.getAllLists();
-    const currentIndex = listManager.getCurrentListIndex();
-    let sortedItems = lists[currentIndex].listItems;
+    const currentListId = listManager.getCurrentListId();
+    let sortedItems = listManager.getListItems(currentListId);
     sortedItems = sortedItems.sort((a,b) => {
         if (b[text] < a[text]) {
             return -1
