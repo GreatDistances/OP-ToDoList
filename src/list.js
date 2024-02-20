@@ -7,5 +7,7 @@ export default class List {
         this.listItems = [];
     }
 
-    // static method for creating new lists, not necessary on instances of class
+    static createList = (listTitle) => {
+        return new List(listTitle);
+    }
 }

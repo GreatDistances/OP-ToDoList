@@ -1,4 +1,4 @@
-import { deleteItem } from "./addItem.js";
+import { listManager } from './index.js';
 
 const listItemsContainer = document.querySelector("#listItemsContainer");
 
@@ -116,7 +116,7 @@ const displayListItems = (arr) => {
         deleteItemBtn.innerText = "X";
         deleteItemBtn.classList.add("deleteBtn");
         deleteItemBtn.addEventListener("click", () => {
-            deleteItem(arr[i].itemId);
+            listManager.deleteItem(arr[i].itemId);
         })
         itemSubSubContainer.append(deleteItemBtn);
     }

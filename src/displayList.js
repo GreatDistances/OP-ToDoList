@@ -1,12 +1,13 @@
-import {lists, getCurrentListId, setCurrentListId, getCurrentListIndex, getListsLength } from './lists.js';
+import { listManager } from './index.js';
 import displayListItems from './displayListItem.js';
-import { addItem } from './addItem.js';
 import { createListItem } from './createListItem.js';
 
 let sortFlag = "";
 
+
 const displayList = (id) => {
 
+    const lists = listManager.getAllLists();
 
     const listItemsContainer = document.querySelector("#listItemsContainer");
     
@@ -18,7 +19,7 @@ const displayList = (id) => {
         return;
     }
 
-    setCurrentListId(id);
+    listManager.setCurrentListId(id);
 
     const titleTd = document.createElement("h1");
     let displayTitle;
@@ -51,7 +52,7 @@ const displayList = (id) => {
             sortItemsAsc("itemDueDate");
             sortFlag = "itemDueDateDesc";
         };
-        displayList(getCurrentListId());
+        displayList(listManager.getCurrentListId());
     });
     listItemSortBtnDiv.append(sortByDateBtn);
 
@@ -67,7 +68,7 @@ const displayList = (id) => {
             sortItemsAsc("itemPriority");
             sortFlag = "itemPriorityAsc";
         };
-        displayList(getCurrentListId());
+        displayList(listManager.getCurrentListId());
     });
     listItemSortBtnDiv.append(sortByPriorityBtn);
 
@@ -83,7 +84,7 @@ const displayList = (id) => {
             sortItemsDesc("itemIsCompleted");
             sortFlag = "itemIsCompletedDesc";
         };
-        displayList(getCurrentListId());
+        displayList(listManager.getCurrentListId());
     });
     listItemSortBtnDiv.append(sortByItemIsCompletedBtn);
 
@@ -91,7 +92,7 @@ const displayList = (id) => {
     listItemsContainer.append(listItemBtnDivContainer);
 
     for (let i = 0; i < lists.length; i++) {
-        if (getListsLength === 0) {
+        if (lists.length === 0) {
             console.log("no lists");
             return;
         }
@@ -122,14 +123,15 @@ submitItemBtn.addEventListener("click", () => {
     const newItemPriority = document.querySelector("#itemPriority").value;
     const newItemDueDate = document.querySelector("#itemDueDate").value;
     const newItemNotes = document.querySelector("#itemNotes").value;
-    addItem(createListItem(newItemName, newItemDescription, newItemPriority, newItemDueDate, newItemNotes));
-    displayList(getCurrentListId());
+    listManager.addItem(createListItem(newItemName, newItemDescription, newItemPriority, newItemDueDate, newItemNotes));
+    displayList(listManager.getCurrentListId());
     addItemDialog.close();
     addItemForm.reset();
 });
 
 const sortItemsAsc = (text) => {
-    const currentIndex = getCurrentListIndex();
+    const lists = listManager.getAllLists();
+    const currentIndex = listManager.getCurrentListIndex();
     let sortedItems = lists[currentIndex].listItems;
     sortedItems = sortedItems.sort((a,b) => {
         if (a[text] < b[text]) {
@@ -146,7 +148,8 @@ const sortItemsAsc = (text) => {
 }
 
 const sortItemsDesc = (text) => {
-    const currentIndex = getCurrentListIndex();
+    const lists = listManager.getAllLists();
+    const currentIndex = listManager.getCurrentListIndex();
     let sortedItems = lists[currentIndex].listItems;
     sortedItems = sortedItems.sort((a,b) => {
         if (b[text] < a[text]) {

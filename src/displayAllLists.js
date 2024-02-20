@@ -1,14 +1,12 @@
-import {lists} from './lists.js';
+import { listManager } from './index.js';
 import {displayList} from './displayList.js';
-import {deleteList} from './lists.js'
 
 const listContainer = document.querySelector("#listContainer");
 
 const displayAllLists = () => {
     listContainer.replaceChildren(); // clears prior view of existing lists
-    // const listsDisplay =
-    //    lists.map(item => ({ listId: item.listId, listTitle: item.listTitle, listItems: item.listItems}));
-    //console.log(listsDisplay);
+
+    const lists = listManager.getAllLists();
 
     for (let i = 0; i < lists.length; i++) {
         let thisList = document.createElement("div");
@@ -23,27 +21,32 @@ const displayAllLists = () => {
             })
             thisList.append(viewListBtn);
 
-            let td1 = document.createElement("div");
-            td1.textContent = lists[i].listTitle;
-            td1.contentEditable="true";
-            td1.onblur = () => {
-                lists[i].listTitle = td2.innerText;
+            let listTitleField = document.createElement("div");
+            listTitleField.innerText = lists[i].listTitle;
+            console.log(lists);
+            // td1.textContent = lists[i].listTitle; // TODO: editing to getListTitle call
+            
+            listTitleField.contentEditable="true";
+            listTitleField.onblur = () => {
+                // lists[i].listTitle = td2.innerText; // TODO: editing to setListTitle() call
+                listManager.setListTitle(listTitleField.innerText);
             }
-            td1.addEventListener("keypress", function(e) {
+            listTitleField.addEventListener("keypress", function(e) {
                 if (e.key === "Enter") {
-                    lists[i].listTitle = td2.innerText;
-                    td2.blur();
+                    // lists[i].listTitle = td2.innerText; // TODO: editing to setListTitle() call
+                    listManager.setListTitle(listTitleField.innerText);
+                    listTitleField.blur();
                 }
             });
 
             let deleteListBtn = document.createElement("button");
             deleteListBtn.addEventListener("click", function() {
-                deleteList(lists[i].listId)
+                listManager.deleteList(lists[i].listId)
             });
             deleteListBtn.classList.add("deleteBtn")
             deleteListBtn.innerText = "X";
 
-            thisList.append(td1, deleteListBtn);
+            thisList.append(listTitleField, deleteListBtn);
     }
 }
 

@@ -1,13 +1,13 @@
-import {lists, addNewList, deleteList, getCurrentListId } from './lists.js';
-import {addItem} from './addItem.js';
-import {createListItem} from './createListItem.js';
-import createList from './createList.js';
+import ListManager from './ListManager.js';
+import List from './list.js';
 import displayAllLists from './displayAllLists.js';
 import {displayList} from './displayList.js';
-import {setItemTitle, setItemDescription, setItemPriority, setItemNotes, setItemDueDate} from "./modifyItem.js";
 
-displayAllLists();
-displayList(getCurrentListId());
+const listManager = new ListManager();
+
+listManager.setCurrentListId(-1); // initialize app with no list selected
+displayAllLists(); // display all available lists
+displayList(listManager.getCurrentListId()); // initialize app with no list displayed
 
 const addListDialog = document.querySelector("#addListDialog");
 const addListForm = document.querySelector("#addListForm");
@@ -25,11 +25,12 @@ closeAddListDialogBtn.addEventListener("click", () => {
 const submitListBtn = document.querySelector("#submitListBtn");
 submitListBtn.addEventListener("click", () => {
     const newListName = document.querySelector("#listTitle").value;
-    addNewList(createList(newListName));
+    listManager.addNewList(List.createList(newListName));
     addListForm.reset();
     addListDialog.close();
 });
 
+export { listManager };
 
 
 
@@ -102,6 +103,3 @@ setItemDueDate("I100003", 2024, 5, 2);
 setItemDueDate("I100003", "-");
 
 displayAllLists(); */
-
-export {lists};
-

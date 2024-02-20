@@ -1,4 +1,4 @@
-import {lists, getCurrentListId, setCurrentListId } from './lists.js';
+import { listManager } from './index.js';
 import {displayList} from './displayList.js';
 
 const sendMsg = (msg) => {
