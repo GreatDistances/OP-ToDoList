@@ -28,6 +28,7 @@ submitListBtn.addEventListener("click", () => {
     listManager.addNewList(List.createList(newListName));
     addListForm.reset();
     addListDialog.close();
+    displayList(listManager.getCurrentListId());
 });
 
 export { listManager };

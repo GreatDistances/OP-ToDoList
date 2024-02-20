@@ -10,32 +10,32 @@ class ListManager {
         new ListItem(
           "File 2023 personal taxes",
           "Complete and file federal taxes for 2023 tax year",
-          "2024-04-15",
           "!!",
+          "2024-04-15",
           "Download and reconcile all statements",
           false
         ),
         new ListItem(
           "Pick up Amazon packages",
           "Location: Amazon locker on Main St",
-          "2024-02-21",
           "!",
+          "2024-02-21",
           "New running shoes & phone charging cable",
           true
         ),
         new ListItem(
           "Shred old tax files",
           "All files > 7 years old",
-          "2025-01-01",
           "",
+          "2025-01-01",
           "",
           false
         ),
         new ListItem(
           "Oil change for SUV",
           "Between 3000-5000 miles",
-          "2024-03-01",
           "!!",
+          "2024-03-01",
           "",
           true
         ),
@@ -44,9 +44,10 @@ class ListManager {
     this.currentListId = -1;
   }
     getAllLists() {
+      console.log(this.listRepository);
       return this.listRepository;
     }
-
+    
     // TODO to prevent programs on program load:  setCurrentListId(-1);
     setCurrentListId(num) {
       this.currentListId = num;
@@ -54,6 +55,7 @@ class ListManager {
     };
 
     getCurrentListId() {
+
       return this.currentListId;
     };
 
@@ -69,7 +71,7 @@ class ListManager {
     addNewList(listObj) {
       this.listRepository.push(listObj);
       displayAllLists();
-      this.setCurrentListId(((this.listRepository).length - 1).listId);
+      this.setCurrentListId(this.listRepository[this.listRepository.length -1].listId);
       displayList(this.getCurrentListId());
     };
 
@@ -147,7 +149,6 @@ class ListManager {
       );
       return itemIndex;
     };
-  
 }
 
 export default ListManager;

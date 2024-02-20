@@ -4,7 +4,6 @@ const listItemsContainer = document.querySelector("#listItemsContainer");
 
 const displayListItems = (arr) => {
     for (let i = 0; i < arr.length; i++) {
-        console.log(arr[i].itemTitle);
 
         // parent of itemIsCompletedCheckBoxDiv and itemSubContainer
         const itemContainer = document.createElement("div");
