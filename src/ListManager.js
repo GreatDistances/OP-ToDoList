@@ -66,21 +66,6 @@ class ListManager {
       return index;
     };
 
-    getListItemIndex(currentItemId) {
-      const listIndex = this.getCurrentListIndex();
-      if (listIndex === -1) {
-        return -1;
-      }
-      const list = this.listRepository[listIndex];
-      if (!list.listItems) {
-        return -1;
-      }
-      const itemIndex = list.listItems.findIndex(
-        (item) => item.itemId === currentItemId
-      );
-      return itemIndex;
-    };
-
     addNewList(listObj) {
       this.listRepository.push(listObj);
       displayAllLists();
@@ -122,16 +107,47 @@ class ListManager {
               displayList(this.listRepository[listIndex].listId)
   }
 
-    getListTitle(id) {
-      // TODO:  getter for listTitle
+  getListTitle(listId) {
+    if (listId === -1) {
+      return;
     }
+    const index = this.listRepository.map((e) => e.listId).indexOf(listId);
+    const title = this.listRepository[index].listTitle;
+    return title;
+  };
 
-    setListTitle(id) {
-    // TODO:  setter for listTitle
-    }
+    setListTitle(listId, newTitle) {
+      const index = this.listRepository.map((e) => e.listId).indexOf(listId);
+      if (index === -1) {
+        return;
+      }
+      if (this.listRepository[index].listTitle === newTitle) {
+        console.log("New entered title same as prior, no changes");
+        return;
+      }
+      this.listRepository[index].listTitle = newTitle;
+      console.log(`List ID# ${listId} listTitle updated to ${newTitle}`);
+      console.log(this.listRepository);
+    };
 
     // TODO:  getters and setters for all listItem fields, and related code in DOM manipulation files.
 
+
+    getListItemIndex(currentItemId) {
+      const listIndex = this.getCurrentListIndex();
+      if (listIndex === -1) {
+        return -1;
+      }
+      const list = this.listRepository[listIndex];
+      if (!list.listItems) {
+        return -1;
+      }
+      const itemIndex = list.listItems.findIndex(
+        (item) => item.itemId === currentItemId
+      );
+      return itemIndex;
+    };
+  
 }
 
 export default ListManager;

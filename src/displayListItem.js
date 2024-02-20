@@ -30,6 +30,8 @@ const displayListItems = (arr) => {
         itemNotesContainer.classList.add("itemNotesContainer");
         itemSubContainer.append(itemNotesContainer);
 
+            listItemsContainer.append(itemContainer);
+
         const createTextField = (text, container) => {
             const value = arr[i][text];
             const cellContainer = document.createElement("div");
@@ -46,6 +48,7 @@ const displayListItems = (arr) => {
                 if (e.key === "Enter") {
                     arr[i][text] = cell.innerText;
                     cell.blur();
+                    e.preventDefault()
                 }
             });
             cellContainer.append(cell);
@@ -95,8 +98,6 @@ const displayListItems = (arr) => {
             container.append(cellContainer);
         }
 
-        listItemsContainer.append(itemContainer);
-
         const itemIsCompletedCheckbox = document.createElement("INPUT");
         itemIsCompletedCheckbox.setAttribute("type", "checkbox");
         itemIsCompletedCheckbox.checked = arr[i].itemIsCompleted;
@@ -120,6 +121,7 @@ const displayListItems = (arr) => {
         })
         itemSubSubContainer.append(deleteItemBtn);
     }
+
 }
 
 export default displayListItems;

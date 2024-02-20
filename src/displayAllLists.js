@@ -24,20 +24,24 @@ const displayAllLists = () => {
             let listTitleField = document.createElement("div");
             listTitleField.innerText = lists[i].listTitle;
             console.log(lists);
-            // td1.textContent = lists[i].listTitle; // TODO: editing to getListTitle call
             
             listTitleField.contentEditable="true";
-            listTitleField.onblur = () => {
-                // lists[i].listTitle = td2.innerText; // TODO: editing to setListTitle() call
-                listManager.setListTitle(listTitleField.innerText);
-            }
-            listTitleField.addEventListener("keypress", function(e) {
+            let enterKeyPressed = false; // flag to prevent both enter keydown + blur from firing setListTitle on enter keydown
+            listTitleField.addEventListener("keydown", function(e) {
                 if (e.key === "Enter") {
-                    // lists[i].listTitle = td2.innerText; // TODO: editing to setListTitle() call
+                    enterKeyPressed = true; // sets enterKeyPressed flag to true so onblur event does not fire setListTitle
+                    listManager.setListTitle(lists[i].listId, listTitleField.innerText);
                     listManager.setListTitle(listTitleField.innerText);
                     listTitleField.blur();
+                    e.preventDefault()
                 }
             });
+            listTitleField.onblur = () => {
+                if (!enterKeyPressed) { // if enterKeyPressed, do not fire setListTitle
+                    listManager.setListTitle(lists[i].listId, listTitleField.innerText);
+                }
+                enterKeyPressed = false; // reset enterKeyPressed flag
+            }
 
             let deleteListBtn = document.createElement("button");
             deleteListBtn.addEventListener("click", function() {
