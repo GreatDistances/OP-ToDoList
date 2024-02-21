@@ -49,6 +49,7 @@ h1 {
     border-left: none;
     border-right: none;
     padding: 8px;
+    overflow: hidden;
 }
 
 .thisList button {
@@ -59,10 +60,33 @@ h1 {
     
 }
 
+.fields {
+    border-bottom: 1px solid grey;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 6px;
+    text-overflow: ellipsis;
+    width: calc(100% - 10px);
+}
+
 .listTitleContainer {
     display: flex;
     justify-content: space-between;
 }
+
+.listTitleContainer h1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.listTitleContainer h3 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 
 .listItemsContainer {
     grid-area: listItemsContainer;
@@ -99,66 +123,38 @@ h1 {
 
 .itemContainer {
     display: grid;
-    grid-template-columns: 30px 1fr;
-    gap: 15px;
-    padding: 12px;
+    grid-template-columns: 30px 1fr 30px;
+    gap: 10px;
+    padding: 8px;
     margin: 8px 0;
     border: 1px solid grey;
     border-radius: 5px;
     background-color: white;
 }
 
-.itemSubContainer {
-    display: grid;
-    gap: 8px;
-}
-
-.itemIsCompletedCheckBoxDiv {
+.itemIsCompletedCheckBoxDiv, .deleteItemBtnContainer {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 input[type="checkbox"] {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
 }
 
-.itemSubSubContainer {
+.itemFieldsContainer {
     display: grid;
     gap: 15px;
-    grid-template-columns: 1fr 1.5fr 125px 50px 30px;
+    padding-top: 12px;
+    grid-template-columns: 1fr 1fr 1fr 130px 58px;
     align-items:baseline;
-}
-
-.itemSubSubContainer div > div {
-    border-bottom: 1px solid grey;
-    padding: 8px;
-}
-
-.itemSubSubContainer input, select {
-    border-bottom: 1px solid grey;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding: 8px;
 }
 
 .listItemLabel {
     font-size: 0.8em;
     padding-left: 8px;
     color: #888888;
-}
-
-.itemNotesContainer {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr;
-    gap: 8px;
-}
-
-.itemNotesContainer div > div {
-    border-bottom: 1px solid grey;
-    padding: 8px;
 }
 
 .itemTitle {
@@ -168,10 +164,10 @@ input[type="checkbox"] {
 
 .deleteBtn {
     border-radius: 50%;
-    font-size: 1em;
+    font-size: 0.8em;
     padding: 8px;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
