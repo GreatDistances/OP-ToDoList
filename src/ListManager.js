@@ -1,5 +1,6 @@
 import List from "./list.js";
 import ListItem from "./ListItem.js";
+import { createListItem } from "./createListItem.js";
 import displayAllLists from "./displayAllLists.js";
 import { displayList } from "./displayList.js";
 
@@ -92,11 +93,11 @@ class ListManager {
   addNewList(listObj) {
     this.listRepository.push(listObj);
     displayAllLists();
-    this.setCurrentListId(
-      this.listRepository[this.listRepository.length - 1].listId
-    );
-    displayList(this.getCurrentListId());
+    this.setCurrentListId(listObj.listId);
     this.saveToLocalStorage();
+    const newItem = createListItem();
+    this.addListItem(newItem);
+    displayList(this.getCurrentListId());
   }
 
   deleteList(id) {
@@ -114,15 +115,16 @@ class ListManager {
     this.saveToLocalStorage();
   }
 
-  addItem(Item) {
+  addListItem(Item) {
     if (this.getCurrentListId() === -1) {
       return;
     }
     for (let i = 0; i < this.listRepository.length; i++) {
       if (this.listRepository[i].listId === this.getCurrentListId()) {
-        this.listRepository[i].listItems.push(Item);
+        this.listRepository[i].listItems.unshift(Item);
       }
     }
+    this.saveToLocalStorage();
   }
 
   deleteItem(id) {

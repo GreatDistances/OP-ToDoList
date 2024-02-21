@@ -24,9 +24,19 @@ const displayList = (id) => {
 
     listManager.setCurrentListId(id);
 
-    const titleTd = document.createElement("h1");
+    const listTitleContainer = document.createElement("div");
+
+    const listTitleH1 = document.createElement("h1");
+    const listIdH1 = document.createElement("h3");
+
     let displayTitle;
-    listItemsContainer.append(titleTd);
+    let displayListId;
+
+    listItemsContainer.append(listTitleContainer);
+    listTitleContainer.classList.add("listTitleContainer");
+    listTitleContainer.append(listTitleH1);
+    listTitleContainer.append(listIdH1);
+
 
     const listItemBtnDivContainer = document.createElement("div");
     listItemBtnDivContainer.classList.add("listItemBtnDivContainer");
@@ -34,14 +44,15 @@ const displayList = (id) => {
     const listItemSortBtnDiv = document.createElement("div");
     listItemSortBtnDiv.classList.add("listItemSortBtnDiv");
 
-    const addItemDialog = document.querySelector("#addItemDialog");
-    const openItemDialogBtn = document.createElement("button");
-    openItemDialogBtn.classList.add("normal-button");
-    openItemDialogBtn.innerText = "Add a task";
-    openItemDialogBtn.addEventListener("click", () => {
-        addItemDialog.showModal();
-    })
-    listItemBtnDivContainer.append(openItemDialogBtn);
+    const newItemBtn = document.createElement("button");
+    newItemBtn.classList.add("normal-button");
+    newItemBtn.innerText = "New Task";
+    newItemBtn.addEventListener("click", () => {
+        listManager.addListItem(createListItem());
+        const currentListId = listManager.getCurrentListId();
+        displayList(currentListId);
+    });
+    listItemBtnDivContainer.append(newItemBtn);
 
     const sortByDateBtn = document.createElement("button");
     sortByDateBtn.classList.add("normal-button");
@@ -101,7 +112,9 @@ const displayList = (id) => {
         }
         if (lists[i].listId === id) {
             displayTitle = `Project: ${lists[i].listTitle}`;
-            titleTd.innerText = displayTitle;
+            displayListId = `ID # ${lists[i].listId}`
+            listTitleH1.innerText = displayTitle;
+            listIdH1.innerText = displayListId;
             if (lists[i].listItems.length > 0) {
                 displayListItems(id);
             } else {
@@ -113,27 +126,6 @@ const displayList = (id) => {
         }
     }
 }
-
-const closeAddItemDialogBtn = document.querySelector("#closeAddItemDialogBtn");
-closeAddItemDialogBtn.addEventListener("click", () => {
-    addItemDialog.close();
-})
-
-const addItemForm = document.querySelector('#addItemForm');
-
-const submitItemBtn = document.querySelector("#submitItemBtn");
-submitItemBtn.addEventListener("click", () => {
-    const newItemName = document.querySelector("#itemTitle").value;
-    const newItemDescription = document.querySelector("#itemDescription").value;
-    const newItemPriority = document.querySelector("#itemPriority").value;
-    const newItemDueDate = document.querySelector("#itemDueDate").value;
-    const newItemNotes = document.querySelector("#itemNotes").value;
-    listManager.addItem(createListItem(newItemName, newItemDescription, newItemPriority, newItemDueDate, newItemNotes));
-    const currentListId = listManager.getCurrentListId();
-    displayList(currentListId);
-    addItemDialog.close();
-    addItemForm.reset();
-});
 
 const sortItemsAsc = (text) => {
     const currentListId = listManager.getCurrentListId();

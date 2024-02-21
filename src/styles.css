@@ -19,7 +19,7 @@ h1 {
 }
 
 .newListBtn {
-    
+
 }
 
 .sideBar {
@@ -53,6 +53,15 @@ h1 {
 
 .thisList button {
     justify-self:stretch;
+}
+
+.newItemBtn {
+    
+}
+
+.listTitleContainer {
+    display: flex;
+    justify-content: space-between;
 }
 
 .listItemsContainer {
@@ -157,30 +166,6 @@ input[type="checkbox"] {
     padding-bottom: 5px;
 }
 
-.addItemDialog {
-    padding: 40px;
-    border-radius: 5px;
-}
-
-.addItemDialog input, .addItemDialog select {
-    border-bottom: 1px solid grey;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    width: 200px;
-    padding: 8px;
-}
-
-.addItemDialogContainerButtons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-}
-
-.submitListBtn, .submitItemBtn {
-    background-color: lightgreen;
-}
-
 .deleteBtn {
     border-radius: 50%;
     font-size: 1em;
@@ -190,10 +175,4 @@ input[type="checkbox"] {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.addListDialog legend, .addItemDialog legend {
-    text-align: center;
-    font-size: 1em;
-    margin-bottom: 15px;
 }
