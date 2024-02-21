@@ -37,7 +37,7 @@ const initializeApp = () => {
 
 const loadLocalStorage = () => {
     const listManagerFromStorage = localStorage.getItem("ListManager");
-    if (!listManagerFromStorage) {
+    if (!listManagerFromStorage || listManagerFromStorage === undefined) {
         // if ListManager is not available in localStorage, create a new one
         listManager = new ListManager();
         // Save new ListManager to localStorage

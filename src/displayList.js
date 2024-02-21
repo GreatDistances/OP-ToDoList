@@ -8,6 +8,8 @@ const displayList = (id) => {
 
     const lists = [...listManager.getAllLists()];
 
+                    const noTasksMessage = document.createElement("div");
+
     const listItemsContainer = document.querySelector("#listItemsContainer");
     
     listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
@@ -103,7 +105,7 @@ const displayList = (id) => {
             if (lists[i].listItems.length > 0) {
                 displayListItems(id);
             } else {
-                const noTasksMessage = document.createElement("div");
+
                 noTasksMessage.classList.add("itemContainerNoTasks");
                 noTasksMessage.innerText = "There are currently no tasks in this project.";
                 listItemsContainer.append(noTasksMessage);
