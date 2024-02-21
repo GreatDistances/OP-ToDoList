@@ -18,6 +18,10 @@ h1 {
     border-radius: 5px;
 }
 
+.newListBtn {
+    
+}
+
 .sideBar {
     grid-area: sidebar;
     background-color: lightgrey;
@@ -151,25 +155,6 @@ input[type="checkbox"] {
 .itemTitle {
     font-size: 1.25em;
     padding-bottom: 5px;
-}
-
-.addListDialog {
-    padding: 40px;
-    border-radius: 5px;
-}
-
-.addListDialog input {
-    border-bottom: 1px solid grey;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding: 8px;
-}
-
-.addListDialogContainerButtons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
 }
 
 .addItemDialog {

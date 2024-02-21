@@ -9,25 +9,13 @@
 <body>
     <div id="sideBar" class="sideBar">
         <h1>Projects</h1>
-        <button id="openAddListDialogBtn" class="openAddListDialogBtn normal-button">New Project</button>
+        <button id="newListBtn" class="newListBtn normal-button">New Project</button>
         <div id="listContainer" class="listContainer">
         </div>
     </div>
     <div id="listItemsContainer" class="listItemsContainer">
     </div>
-    <dialog id="addListDialog" class="addListDialog">
-        <legend>NEW PROJECT</legend>
-        <form id="addListForm">
-            <input type="text" name="listTitle" id="listTitle"></input><br>
-            <label for="listTitle">Project Title</label><br><br>
-        </form>
-        <div class="addListDialogContainerButtons">
-        <button id="submitListBtn" class="submitListBtn normal-button">Create</button>
-        <button id="closeAddListDialogBtn" class="closeAddListDialogBtn normal-button">Cancel</button>
-        </div>
-    </dialog>
     <dialog id="addItemDialog" class="addItemDialog">
-
         <form id="addItemForm">
             <legend>NEW TASK</legend>
             <input type="text" name="itemTitle" id="itemTitle"></input><br>

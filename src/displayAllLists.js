@@ -31,7 +31,7 @@ const displayAllLists = () => {
                 if (e.key === "Enter") {
                     enterKeyPressed = true; // sets enterKeyPressed flag to true so onblur event does not fire setListTitle
                     listManager.setListTitle(lists[i].listId, listTitleField.innerText);
-                    listManager.setListTitle(listTitleField.innerText);
+                    displayList(lists[i].listId);
                     listTitleField.blur();
                     e.preventDefault()
                 }

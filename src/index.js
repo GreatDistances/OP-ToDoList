@@ -1,7 +1,7 @@
-import ListManager from './ListManager.js';
-import List from './list.js';
-import displayAllLists from './displayAllLists.js';
-import {displayList} from './displayList.js';
+import ListManager from "./ListManager.js";
+import List from "./list.js";
+import displayAllLists from "./displayAllLists.js";
+import { displayList } from "./displayList.js";
 
 /* // INITIALIZE APP
 let listManager;
@@ -30,64 +30,40 @@ displayList(listManager.getCurrentListId()); // initialize app with no list disp
 let listManager;
 
 const initializeApp = () => {
-    listManager.setCurrentListId(-1); // initialize app with no list selected
-    displayAllLists(); // display all available lists
-    displayList(listManager.getCurrentListId()); // initialize app with no list displayed
-}
+  listManager.setCurrentListId(-1); // initialize app with no list selected
+  displayAllLists(); // display all available lists
+  displayList(listManager.getCurrentListId()); // initialize app with no list displayed
+};
 
 const loadLocalStorage = () => {
-    const listManagerFromStorage = localStorage.getItem("ListManager");
-    if (!listManagerFromStorage || listManagerFromStorage === undefined) {
-        // if ListManager is not available in localStorage, create a new one
-        listManager = new ListManager();
-        // Save new ListManager to localStorage
-        localStorage.setItem("ListManager", JSON.stringify(listManager));
-        console.log("New ListManager created and saved to localStorage.");
-    } else {
-        // if ListManager is in localStorage, parse and assign it
-        const listManagerData = JSON.parse(listManagerFromStorage);
-        // Manually reconstruct the ListManager instance
-        listManager = new ListManager();
-        // Assign properties from the parsed data to the new ListManager instance
-        Object.assign(listManager, listManagerData);
-        console.log("ListManager loaded from localStorage:", listManager);
-    }
-    // Call initializeApp after setting listManager
-    initializeApp();
-}
+  const listManagerFromStorage = localStorage.getItem("ListManager");
+  if (!listManagerFromStorage || listManagerFromStorage === undefined) {
+    // if ListManager is not available in localStorage, create a new one
+    listManager = new ListManager();
+    // Save new ListManager to localStorage
+    localStorage.setItem("ListManager", JSON.stringify(listManager));
+    console.log("New ListManager created and saved to localStorage.");
+  } else {
+    // if ListManager is in localStorage, parse and assign it
+    const listManagerData = JSON.parse(listManagerFromStorage);
+    // Manually reconstruct the ListManager instance
+    listManager = new ListManager();
+    // Assign properties from the parsed data to the new ListManager instance
+    Object.assign(listManager, listManagerData);
+    console.log("ListManager loaded from localStorage:", listManager);
+  }
+  // Call initializeApp after setting listManager
+  initializeApp();
+
+  const newListBtn = document.querySelector("#newListBtn");
+  newListBtn.addEventListener("click", () => {
+    listManager.addNewList(List.createList(""));
+  });
+};
 
 loadLocalStorage();
 
-
-
-const addListDialog = document.querySelector("#addListDialog");
-const addListForm = document.querySelector("#addListForm");
-
-const openAddListDialogBtn = document.querySelector("#openAddListDialogBtn");
-openAddListDialogBtn.addEventListener("click", () => {
-    addListDialog.showModal();
-})
-
-const closeAddListDialogBtn = document.querySelector("#closeAddListDialogBtn");
-closeAddListDialogBtn.addEventListener("click", () => {
-    addListDialog.close();
-})
-
-const submitListBtn = document.querySelector("#submitListBtn");
-submitListBtn.addEventListener("click", () => {
-    const newListName = document.querySelector("#listTitle").value;
-    listManager.addNewList(List.createList(newListName));
-    addListForm.reset();
-    addListDialog.close();
-});
-
 export { listManager };
-
-
-
-
-
-
 
 // TEST INPUT
 /* 

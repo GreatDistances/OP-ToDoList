@@ -81,6 +81,7 @@ class ListManager {
   }
 
   findListIndex(listId) {
+    console.log(listId);
     const index = this.listRepository.map((e) => e.listId).indexOf(listId);
     if (index === -1) {
       console.log(`List ID# ${listId} not found, no list index available`);
@@ -153,6 +154,7 @@ class ListManager {
     this.listRepository[index].listTitle = newTitle;
     console.log(`List ID# ${listId} listTitle updated to ${newTitle}`);
     console.log(this.listRepository);
+    displayAllLists();
     this.saveToLocalStorage();
   }
 
@@ -198,13 +200,14 @@ class ListManager {
   }
 
   setItemDueDate(itemId, newDueDate) {
+    console.log("due date")
     const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
     const itemIndex = this.getListItemIndex(itemId);
     if (listIndex !== -1 && itemIndex !== -1) {
       this.listRepository[listIndex].listItems[itemIndex].itemDueDate =
         newDueDate;
     }
-    saveToLocalStorage();
+    this.saveToLocalStorage();
   }
 
   setItemPriority(itemId, newPriority) {

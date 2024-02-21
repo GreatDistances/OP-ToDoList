@@ -49,7 +49,7 @@ const displayListItems = (id) => {
             cell.addEventListener("keypress", function(e) {
                 if (e.key === "Enter") {
                     cell.innerText
-                    listManager[method](arr[i].itemId, cell.innerText);//arr[i][text] = cell.innerText;
+                    listManager[method](arr[i].itemId, cell.innerText); // sets value in listManager
                     cell.blur();
                     e.preventDefault()
                 }
@@ -59,14 +59,14 @@ const displayListItems = (id) => {
                     enterKeyPressed = false;
                     return;
                 }
-                listManager[method](arr[i].itemId, cell.innerText);//arr[i][text] = cell.innerText;
+                listManager[method](arr[i].itemId, cell.innerText); // sets value in listManager
             }
             cellContainer.append(cell);
             cellContainer.append(label);
             container.append(cellContainer);
         }
         
-        const createDateField = (text, container) => {
+        const createDateField = (text, container, method) => {
             const value = arr[i][text];
             const cellContainer = document.createElement("div");
             const cell = document.createElement("INPUT");
@@ -76,14 +76,14 @@ const displayListItems = (id) => {
             cell.setAttribute("type", "date");
             cell.value = value;
             cell.onblur = () => {
-                arr[i][text] = cell.value;
+                listManager[method](arr[i].itemId, cell.value); // sets value in listManager
             }
             cellContainer.append(cell);
             cellContainer.append(label);
             container.append(cellContainer);
         }
 
-        const createSelectField = (text, container) => {
+        const createSelectField = (text, container, method) => {
             const value = arr[i][text];
             const cellContainer = document.createElement("div");
             const cell = document.createElement("select");
@@ -98,10 +98,9 @@ const displayListItems = (id) => {
                 cell.style.fontWeight = "bold";
                 cell.appendChild(opt);
             }
-
             cell.value = value;
             cell.onblur = () => {
-                arr[i][text] = cell.value;
+                listManager[method](arr[i].itemId, cell.value); // sets value in listManager
             }
             cellContainer.append(cell);
             cellContainer.append(label);
