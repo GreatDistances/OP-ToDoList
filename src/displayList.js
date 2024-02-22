@@ -132,7 +132,7 @@ const displayList = (id) => {
 // logic for sorting items ascending
 const sortItemsAsc = (text) => {
     const currentListId = listManager.getCurrentListId();
-    let sortedItems = listManager.getListItems(currentListId);
+    let sortedItems = listManager.getAllListItems(currentListId);
     sortedItems = sortedItems.sort((a,b) => {
         if (a[text] < b[text]) {
             return -1;
@@ -150,7 +150,7 @@ const sortItemsAsc = (text) => {
 // logic for sorting items descending
 const sortItemsDesc = (text) => {
     const currentListId = listManager.getCurrentListId();
-    let sortedItems = listManager.getListItems(currentListId);
+    let sortedItems = listManager.getAllListItems(currentListId);
     sortedItems = sortedItems.sort((a,b) => {
         if (b[text] < a[text]) {
             return -1

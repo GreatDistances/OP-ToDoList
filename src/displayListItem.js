@@ -5,11 +5,13 @@ const listItemsContainer = document.querySelector("#listItemsContainer");
 
 const displayListItems = (id) => {
 
-    const arr = [...listManager.getListItems(id)];
+    const arr = [...listManager.getAllListItems(id)];
 
-    arr.forEach((item) => console.log(item));
+    console.log(arr.length);
+    //arr.forEach((item) => console.log(item));
 
     for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
 
         // parent of itemIsCompletedCheckBoxDiv, itemContainer, deleteItemBtnContainer
         const itemContainer = document.createElement("div");
@@ -109,6 +111,7 @@ const displayListItems = (id) => {
             container.append(cellContainer);
         }
 
+        const createItemIsCompletedCheckbox = () => {
         const itemIsCompletedCheckbox = document.createElement("INPUT");
         itemIsCompletedCheckbox.setAttribute("type", "checkbox");
         itemIsCompletedCheckbox.checked = arr[i].itemIsCompleted;
@@ -117,7 +120,9 @@ const displayListItems = (id) => {
         })
         itemIsCompletedCheckBoxDiv.classList.add("itemIsCompletedCheckBoxDiv");
         itemIsCompletedCheckBoxDiv.append(itemIsCompletedCheckbox);
+    }
 
+        createItemIsCompletedCheckbox();
         createTextField("itemTitle", itemFieldsContainer, "setItemTitle");
         createTextField("itemDescription", itemFieldsContainer, "setItemDescription");
         createTextField("itemNotes", itemFieldsContainer, "setItemNotes");

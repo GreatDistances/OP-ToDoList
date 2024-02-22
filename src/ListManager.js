@@ -8,6 +8,7 @@ import { focusListTitle, focusItemTitle } from "./focus.js";
 class ListManager {
   constructor() {
     this.listRepository = [
+      new List("Unassigned Tasks", []),
       new List("Demo List Personal", [
         new ListItem(
           "File 2023 personal taxes",
@@ -43,7 +44,7 @@ class ListManager {
         ),
       ]),
     ];
-    this.currentListId = -1;
+    this.currentListId = 0;
   }
 
   saveToLocalStorage() {
@@ -107,6 +108,10 @@ class ListManager {
   }
 
   deleteList(id) {
+    if (id === "L10000") {
+      console.log("Unassigned Tasks list cannot be deleted by user.");
+      return;
+    }
     const index = this.findListIndex(id);
     index !== -1
       ? (this.listRepository.splice(index, 1),
@@ -121,10 +126,7 @@ class ListManager {
     this.saveToLocalStorage();
   }
 
-  addListItem(itemObj) {
-    if (this.getCurrentListId() === -1) {
-      return;
-    }
+  addListItem(itemObj, listId) {
     for (let i = 0; i < this.listRepository.length; i++) {
       if (this.listRepository[i].listId === this.getCurrentListId()) {
         this.listRepository[i].listItems.unshift(itemObj);
@@ -180,13 +182,21 @@ class ListManager {
     return itemIndex;
   }
 
-  getListItems(listId) {
+  getAllListItems(listId) {
     const index = this.findListIndex(listId);
     const listItemsArr = this.listRepository[index].listItems;
     if (listItemsArr.length < 1) {
       return -1;
     }
+    //console.log(listItemsArr);
     return listItemsArr;
+  }
+
+  getListItem(listId, itemId) {
+    const allListItems = this.getAllListItems(listId);
+    const listItem = allListItems.find((element) => element.itemId === itemId);
+    console.log(listItem);
+    return(listItem);
   }
 
   setItemTitle(itemId, newTitle) {
@@ -235,6 +245,13 @@ class ListManager {
     if (listIndex !== -1 && itemIndex !== -1) {
       this.listRepository[listIndex].listItems[itemIndex].itemNotes = newNotes;
     }
+    this.saveToLocalStorage();
+  }
+
+  setItemToDifferentList(itemId, oldListId, newListId) {
+    const listItem = this.getListItem(itemId);
+    //this.addListItem(listItem, newListId)
+    //this.deleteItem(listItem, oldListId);
     this.saveToLocalStorage();
   }
 }

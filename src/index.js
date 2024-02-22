@@ -8,8 +8,9 @@ let listManager;
 
 const initializeApp = () => {
   displayAllLists(); // display all available lists
-  displayList(listManager.getCurrentListId()); // initialize app with no list displayed
   createListButtons();
+  //displayList("L10000"); // initialize app to unassigned tasks list
+
 };
 
 const loadLocalStorage = () => {

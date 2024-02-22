@@ -50,8 +50,7 @@ const createListButtons = () => {
     listBtnSubContainer.append(sortListsByTitleBtn, sortListsByIdBtn);
 
 const sortListsAsc = (text) => {
-    const currentListId = listManager.getCurrentListId();
-    let sortedLists = listManager.getAllLists(currentListId);
+    let sortedLists = listManager.getAllLists();
     sortedLists = sortedLists.sort((a,b) => {
         if (a[text] < b[text]) {
             return -1;
@@ -68,8 +67,7 @@ const sortListsAsc = (text) => {
   
   // logic for sorting items descending
   const sortListsDesc = (text) => {
-    const currentListId = listManager.getCurrentListId();
-    let sortedLists = listManager.getAllLists(currentListId);
+    let sortedLists = listManager.getAllLists();
     sortedLists = sortedLists.sort((a,b) => {
         if (b[text] < a[text]) {
             return -1
