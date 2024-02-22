@@ -9,7 +9,7 @@ let listManager;
 const initializeApp = () => {
   displayAllLists(); // display all available lists
   createListButtons();
-  //displayList("L10000"); // initialize app to unassigned tasks list
+  displayList("L10000"); // initialize app to unassigned tasks list
 
 };
 
