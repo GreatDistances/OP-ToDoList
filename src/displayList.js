@@ -49,8 +49,8 @@ const displayList = (id) => {
     newItemBtn.classList.add("main-button");
     newItemBtn.innerText = "New Task";
     newItemBtn.addEventListener("click", () => {
-        listManager.addListItem(createListItem(), false);
         const currentListId = listManager.getCurrentListId();
+        listManager.addListItem(createListItem(), currentListId);
         displayList(currentListId);
     });
     listItemBtnDivContainer.append(newItemBtn);

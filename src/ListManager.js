@@ -64,6 +64,14 @@ class ListManager {
     return this.listRepository;
   }
 
+  getAllListIds() {
+    return this.listRepository.map((element) => element.listId);
+  }
+
+  getAllListTitles() {
+    return this.listRepository.map((element) => element.listTitle);
+  }
+
   // TODO to prevent programs on program load:  setCurrentListId(-1);
   setCurrentListId(num) {
     this.currentListId = num;
@@ -128,7 +136,7 @@ class ListManager {
 
   addListItem(itemObj, listId) {
     for (let i = 0; i < this.listRepository.length; i++) {
-      if (this.listRepository[i].listId === this.getCurrentListId()) {
+      if (this.listRepository[i].listId === listId) {
         this.listRepository[i].listItems.unshift(itemObj);
       }
     }
@@ -136,14 +144,13 @@ class ListManager {
     localStorage.setItem("newListId", List.newListId);
   }
 
-  deleteItem(id) {
-    const index = this.getListItemIndex(id);
-    const listIndex = this.getCurrentListIndex();
-    index !== -1
-      ? (this.listRepository[listIndex].listItems.splice(index, 1),
-        console.log(`Item ID# ${id} deleted`))
-      : console.log(`Item ID # ${id} not found for delete`);
-    displayList(this.listRepository[listIndex].listId);
+  deleteItem(itemId, listId) {
+    const itemIndex = this.getListItemIndex(itemId);
+    const listIndex = this.findListIndex(listId);
+    itemIndex !== -1
+      ? (this.listRepository[listIndex].listItems.splice(itemIndex, 1),
+        console.log(`Item ID# ${itemId} deleted`))
+      : console.log(`Item ID # ${itemId} not found for delete`);
     this.saveToLocalStorage();
   }
 
@@ -248,10 +255,13 @@ class ListManager {
     this.saveToLocalStorage();
   }
 
-  setItemToDifferentList(itemId, oldListId, newListId) {
-    const listItem = this.getListItem(itemId);
-    //this.addListItem(listItem, newListId)
-    //this.deleteItem(listItem, oldListId);
+  setItemToDifferentList(itemId, currentListId, newListId) {
+    if (currentListId === newListId) {
+      return;
+    }
+    const listItem = this.getListItem(currentListId, itemId);
+    this.addListItem(listItem, newListId)
+    this.deleteItem(listItem.itemId, currentListId);
     this.saveToLocalStorage();
   }
 }
