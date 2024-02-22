@@ -1,4 +1,5 @@
 import { listManager } from './index.js';
+import { focusItemTitle } from './focus.js';
 
 const listItemsContainer = document.querySelector("#listItemsContainer");
 
@@ -36,6 +37,7 @@ const displayListItems = (id) => {
             const enterKeyPressed = false;
             const cellContainer = document.createElement("div");
             const cell = document.createElement("input");
+            cell.setAttribute(`data-${text}`, arr[i].itemId);
             cell.classList.add("fields");
             const br = document.createElement("br");
             const label = document.createElement("label");
@@ -66,6 +68,7 @@ const displayListItems = (id) => {
             const value = arr[i][text];
             const cellContainer = document.createElement("div");
             const cell = document.createElement("input");
+            cell.setAttribute(`data-${text}`, arr[i].itemId);
             cell.classList.add("fields");
             const br = document.createElement("br");
             const label = document.createElement("label");
@@ -84,6 +87,7 @@ const displayListItems = (id) => {
             const value = arr[i][text];
             const cellContainer = document.createElement("div");
             const cell = document.createElement("select");
+            cell.setAttribute(`data-${text}`, arr[i].itemId);
             cell.classList.add("fields");
             const br = document.createElement("br");
             const label = document.createElement("label");

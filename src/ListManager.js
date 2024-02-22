@@ -3,6 +3,7 @@ import ListItem from "./ListItem.js";
 import { createListItem } from "./createListItem.js";
 import displayAllLists from "./displayAllLists.js";
 import { displayList } from "./displayList.js";
+import { focusListTitle, focusItemTitle } from "./focus.js";
 
 class ListManager {
   constructor() {
@@ -65,6 +66,7 @@ class ListManager {
   // TODO to prevent programs on program load:  setCurrentListId(-1);
   setCurrentListId(num) {
     this.currentListId = num;
+    this.saveToLocalStorage();
     return this.currentListId;
   }
 
@@ -91,13 +93,17 @@ class ListManager {
   }
 
   addNewList(listObj) {
-    this.listRepository.push(listObj);
+    this.listRepository.unshift(listObj);
     displayAllLists();
     this.setCurrentListId(listObj.listId);
     this.saveToLocalStorage();
     const newItem = createListItem();
-    this.addListItem(newItem);
+    this.addListItem(newItem, true);
     displayList(this.getCurrentListId());
+    console.log(listObj.listId);
+    focusListTitle(listObj.listId);
+    this.setCurrentListId(listObj.listId);
+    localStorage.setItem("newListId", List.newListId);
   }
 
   deleteList(id) {
@@ -115,16 +121,17 @@ class ListManager {
     this.saveToLocalStorage();
   }
 
-  addListItem(Item) {
+  addListItem(itemObj) {
     if (this.getCurrentListId() === -1) {
       return;
     }
     for (let i = 0; i < this.listRepository.length; i++) {
       if (this.listRepository[i].listId === this.getCurrentListId()) {
-        this.listRepository[i].listItems.unshift(Item);
+        this.listRepository[i].listItems.unshift(itemObj);
       }
     }
     this.saveToLocalStorage();
+    localStorage.setItem("newListId", List.newListId);
   }
 
   deleteItem(id) {

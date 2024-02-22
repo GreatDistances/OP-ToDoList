@@ -1,5 +1,5 @@
 export default class ListItem {
-    static newItemId = 100000;
+    static newItemId = localStorage.getItem("newItemId") || 100000;
 
     constructor(itemTitle = "", itemDescription = "", itemPriority = "", itemDueDate = "", itemNotes = "", itemIsCompleted = false) {
         this.itemId = `I${++ListItem.newItemId}`; // adds I prefix to each item

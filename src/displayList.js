@@ -6,55 +6,56 @@ let sortFlag = "";
 
 const displayList = (id) => {
 
-    const lists = [...listManager.getAllLists()];
-
-                    const noTasksMessage = document.createElement("div");
-
-    const listItemsContainer = document.querySelector("#listItemsContainer");
-    
-    listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
-
-    // if no listId is selected, display text that requests user add or select a project
-    if (!id || id === -1) {
-        const noListSelected = document.createElement("h1");
-        noListSelected.innerText = "Add or Select a Project";
-        listItemsContainer.append(noListSelected);
-        return;
-    }
-
     listManager.setCurrentListId(id);
 
+    const lists = [...listManager.getAllLists()];
+    const noTasksMessage = document.createElement("div");
     const listTitleContainer = document.createElement("div");
-
     const listTitleH1 = document.createElement("h1");
     const listIdH1 = document.createElement("h3");
+    const listItemBtnDivContainer = document.createElement("div");
+    const listItemSortBtnDiv = document.createElement("div");
+
+    const newItemBtn = document.createElement("button");
+    const sortByDateBtn = document.createElement("button");
+    const sortByPriorityBtn = document.createElement("button");
+    const sortByItemIsCompletedBtn = document.createElement("button");
 
     let displayTitle;
     let displayListId;
 
-    listItemsContainer.append(listTitleContainer);
+    const listItemsContainer = document.querySelector("#listItemsContainer");
+    // clear listItemsContainer
+    listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
+
+    // if no listId is selected, display text that requests user add or select a project
+    if (!id || id === -1) {
+        listItemsContainer.innerText = "Add or Select a Project";
+        listItemsContainer.classList.add("noListSelected");
+        return;
+    } else {
+        listItemsContainer.classList.remove("noListSelected");
+    }
+
+    listItemsContainer.append(listTitleContainer, listTitleH1, listIdH1);
+    listTitleContainer.append(listTitleH1, listIdH1);
     listTitleContainer.classList.add("listTitleContainer");
-    listTitleContainer.append(listTitleH1);
-    listTitleContainer.append(listIdH1);
 
-
-    const listItemBtnDivContainer = document.createElement("div");
     listItemBtnDivContainer.classList.add("listItemBtnDivContainer");
 
-    const listItemSortBtnDiv = document.createElement("div");
     listItemSortBtnDiv.classList.add("listItemSortBtnDiv");
 
-    const newItemBtn = document.createElement("button");
-    newItemBtn.classList.add("normal-button");
+    // new item button
+    newItemBtn.classList.add("main-button");
     newItemBtn.innerText = "New Task";
     newItemBtn.addEventListener("click", () => {
-        listManager.addListItem(createListItem());
+        listManager.addListItem(createListItem(), false);
         const currentListId = listManager.getCurrentListId();
         displayList(currentListId);
     });
     listItemBtnDivContainer.append(newItemBtn);
 
-    const sortByDateBtn = document.createElement("button");
+    // sort by date button
     sortByDateBtn.classList.add("normal-button");
     sortByDateBtn.innerText = "Sort By Date";
     listItemsContainer.append(sortByDateBtn);
@@ -70,7 +71,7 @@ const displayList = (id) => {
     });
     listItemSortBtnDiv.append(sortByDateBtn);
 
-    const sortByPriorityBtn = document.createElement("button");
+    // sort by priority button
     sortByPriorityBtn.classList.add("normal-button");
     sortByPriorityBtn.innerText = "Sort By Priority";
     listItemsContainer.append(sortByPriorityBtn);
@@ -86,7 +87,7 @@ const displayList = (id) => {
     });
     listItemSortBtnDiv.append(sortByPriorityBtn);
 
-    const sortByItemIsCompletedBtn = document.createElement("button");
+    // sort by is completed button
     sortByItemIsCompletedBtn.classList.add("normal-button");
     sortByItemIsCompletedBtn.innerText = "Sort By Completion";
     listItemsContainer.append(sortByItemIsCompletedBtn);
@@ -105,13 +106,14 @@ const displayList = (id) => {
     listItemBtnDivContainer.append(listItemSortBtnDiv);
     listItemsContainer.append(listItemBtnDivContainer);
 
+    // loop through list to dynamically generate title and id fields, or no tasks message
     for (let i = 0; i < lists.length; i++) {
         if (lists.length === 0) {
             console.log("no lists");
             return;
         }
         if (lists[i].listId === id) {
-            displayTitle = `Project: ${lists[i].listTitle}`;
+            displayTitle = `Project Name: ${lists[i].listTitle}`;
             displayListId = `ID # ${lists[i].listId}`
             listTitleH1.innerText = displayTitle;
             listIdH1.innerText = displayListId;
@@ -127,6 +129,7 @@ const displayList = (id) => {
     }
 }
 
+// logic for sorting items ascending
 const sortItemsAsc = (text) => {
     const currentListId = listManager.getCurrentListId();
     let sortedItems = listManager.getListItems(currentListId);
@@ -144,6 +147,7 @@ const sortItemsAsc = (text) => {
     return sortedItems;
 }
 
+// logic for sorting items descending
 const sortItemsDesc = (text) => {
     const currentListId = listManager.getCurrentListId();
     let sortedItems = listManager.getListItems(currentListId);
