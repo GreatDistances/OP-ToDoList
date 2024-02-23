@@ -168,6 +168,7 @@ const displayListItems = (id) => {
         deleteItemBtn.classList.add("deleteBtn");
         deleteItemBtn.addEventListener("click", () => {
             listManager.deleteItem(arr[i].itemId, currentListId);
+            displayList(currentListId);
         })
         deleteItemBtnContainer.append(deleteItemBtn);
         itemContainer.append(deleteItemBtnContainer);

@@ -124,10 +124,12 @@ h1 {
     margin: 8px 0;
     border: 1px solid grey;
     border-radius: 5px;
-    background-color: lightgreen;
+    background-color: lightgoldenrodyellow;
 }
 .unassignedItemsListTitle {
-
+    padding-left: 4px;
+    padding-bottom: 2px;
+    font-size: 0.9em;
 }
 
 .newItemBtn {
@@ -225,7 +227,7 @@ input[type="checkbox"] {
 .itemFieldsContainer {
     display: grid;
     gap: 15px;
-    grid-template-columns: 1fr 1fr 1fr 130px 58px;
+    grid-template-columns: 1fr 1fr 0.75fr 130px 58px;
     align-items:baseline;
 }
 

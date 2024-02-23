@@ -1,5 +1,5 @@
 import { listManager } from './index.js';
-import displayListItems from './displayListItem.js';
+import displayListItems from './displayListItems.js';
 import { createListItem } from './createListItem.js';
 
 let sortFlag = "";

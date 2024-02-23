@@ -1,7 +1,7 @@
 import List from "./list.js";
 import ListItem from "./ListItem.js";
 import { createListItem } from "./createListItem.js";
-import displayAllLists from "./displayAllLists.js";
+import displaySideBarLists from "./displaySideBarLists.js";
 import { displayList } from "./displayList.js";
 import { focusListTitle, focusItemTitle } from "./focus.js";
 
@@ -103,7 +103,7 @@ class ListManager {
 
   addNewList(listObj) {
     this.listRepository.unshift(listObj);
-    displayAllLists();
+    displaySideBarLists();
     this.setCurrentListId(listObj.listId);
     this.saveToLocalStorage();
     const newItem = createListItem();
@@ -125,7 +125,7 @@ class ListManager {
       ? (this.listRepository.splice(index, 1),
         console.log(`List ID# ${id} deleted`))
       : console.log(`List ID # ${id} not found for delete`);
-    displayAllLists();
+    displaySideBarLists();
     if (this.listRepository.length === 0) {
       displayList(-1);
     } else {
@@ -172,7 +172,7 @@ class ListManager {
     this.listRepository[index].listTitle = newTitle;
     console.log(`List ID# ${listId} listTitle updated to ${newTitle}`);
     console.log(this.listRepository);
-    displayAllLists();
+    displaySideBarLists();
     this.saveToLocalStorage();
   }
 
@@ -188,6 +188,14 @@ class ListManager {
     const itemIndex = list.findIndex((item) => item.itemId === currentItemId);
     return itemIndex;
   }
+
+  getAllListItemsAllLists() {
+    let allListItems = [];
+    this.listRepository.forEach(list => {
+        allListItems = allListItems.concat(list.listItems);
+    });
+    return allListItems;
+}
 
   getAllListItems(listId) {
     const index = this.findListIndex(listId);

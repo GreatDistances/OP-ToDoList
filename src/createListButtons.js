@@ -1,12 +1,18 @@
 import List from "./list.js";
 import { listManager } from "./index.js";
-import displayAllLists from "./displayAllLists.js";
+import displaySideBarLists from "./displaySideBarLists.js";
+import { displayAllTasks } from "./displayAllTasks.js";
 
 const createListButtons = () => {
  
     const newListBtn = document.querySelector("#newListBtn");
     newListBtn.addEventListener("click", () => {
       listManager.addNewList(List.createList(""));
+    });
+
+    const displayAllTasksBtn = document.querySelector("#displayAllTasksBtn");
+    displayAllTasksBtn.addEventListener("click", () => {
+      displayAllTasks();
     });
   
     let sortFlag = "";
@@ -28,7 +34,7 @@ const createListButtons = () => {
           sortListsDesc("listId");
           sortFlag = "listIdDesc";
       };
-      displayAllLists();
+      displaySideBarLists();
   });
   
   
@@ -43,7 +49,7 @@ const createListButtons = () => {
           sortListsDesc("listTitle");
           sortFlag = "listTitleDesc";
       };
-      displayAllLists();
+      displaySideBarLists();
   });
   
     listBtnContainer.append(listBtnSubContainer);
