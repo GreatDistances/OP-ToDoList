@@ -113,7 +113,11 @@ const displayList = (id) => {
             return;
         }
         if (lists[i].listId === id) {
-            displayTitle = `Project Name: ${lists[i].listTitle}`;
+            if (lists[i].listTitle === "") {
+                displayTitle = "Untitled Project";
+            } else {
+                displayTitle = `${lists[i].listTitle}`;
+            }
             displayListId = `ID # ${lists[i].listId}`
             listTitleH1.innerText = displayTitle;
             listIdH1.innerText = displayListId;

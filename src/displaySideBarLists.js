@@ -17,7 +17,7 @@ const displayAllLists = () => {
     const createViewListBtn = () => {
       const viewListBtn = document.createElement("button");
       viewListBtn.innerText = "View";
-      viewListBtn.classList.add("normal-button");
+      viewListBtn.classList.add("normal-button-plus");
       viewListBtn.addEventListener("click", () => {
         displayList(thisListId);
       });
