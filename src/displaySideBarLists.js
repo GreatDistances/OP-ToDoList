@@ -26,16 +26,17 @@ const displayAllLists = () => {
 
     // listTitleField - different for unassigned tasks vs. user lists
     const createListTitleField = (listId) => {
-        let listTitleField;
-        if (listId === "L10000") {
-            listTitleField = document.createElement("div");
-            listTitleField.innerText = "Unassigned Tasks";
-            listTitleField.classList.add("unassignedItemsListTitle");
-        } else {
-            listTitleField = document.createElement("input");
-            listTitleField.value = lists[i].listTitle;
-            listTitleField.classList.add("fields");
-        }
+      let listTitleField;
+      // leave this conditional in, in case putting unassigned tasks list back in is desired
+      if (listId === "L10000") {
+        listTitleField = document.createElement("div");
+        listTitleField.innerText = "Unassigned Tasks";
+        listTitleField.classList.add("unassignedItemsListTitle");
+      } else {
+        listTitleField = document.createElement("input");
+        listTitleField.value = lists[i].listTitle;
+        listTitleField.classList.add("fields");
+      }
       listTitleField.setAttribute("data-list-title-id", thisListId);
       thisList.append(listTitleField);
       listTitleField.addEventListener("keydown", function (e) {
@@ -48,12 +49,12 @@ const displayAllLists = () => {
       listTitleField.addEventListener("change", function () {
         const newValue = listTitleField.value.trim();
         const oldValue = lists[i].listTitle.trim();
-    
+
         if (newValue !== oldValue) {
-            listManager.setListTitle(thisListId, newValue);
-            displayList(thisListId);
+          listManager.setListTitle(thisListId, newValue);
+          displayList(thisListId);
         }
-    });
+      });
       thisList.append(listTitleField);
     };
 
@@ -77,6 +78,7 @@ const displayAllLists = () => {
       deleteListBtn.classList.add("deleteBtn");
       deleteListBtn.innerText = "X";
       thisList.append(deleteListBtnDiv);
+      // leave this conditional in, in case putting unassigned tasks list back in is desired
       if (listId === "L10000") {
         return;
       }
@@ -84,6 +86,7 @@ const displayAllLists = () => {
     };
 
     const setThisListStyling = (listId) => {
+      // leave this conditional in, in case putting unassigned tasks list back in is desired
       if (listId === "L10000") {
         thisList.classList.add("unassignedItemsList");
       } else {
@@ -91,11 +94,13 @@ const displayAllLists = () => {
       }
     };
 
-    createViewListBtn();
-    createListTitleField(thisListId);
-    createListIdField(thisListId);
-    createDeleteListBtnDiv(thisListId);
-    setThisListStyling(thisListId);
+    if (lists[i].listId !== "L10000") {
+      createViewListBtn();
+      createListTitleField(thisListId);
+      createListIdField(thisListId);
+      createDeleteListBtnDiv(thisListId);
+      setThisListStyling(thisListId);
+    }
   }
 };
 

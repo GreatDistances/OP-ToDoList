@@ -10,20 +10,34 @@
     <main>
       <div id="header" class="header">
         <div class="logo">
-            <h3>OnTask</h3>
+          <h3>OnTask</h3>
         </div>
       </div>
       <div id="sideBar" class="sideBar">
         <h1>Projects</h1>
         <div id="listBtnContainer" class="listBtnContainer">
-          <div id="newListBtnDiv" class="newListBtnDiv">
+          <div id="listBtnDivPrimary" class="listBtnDivPrimary">          
             <button id="newListBtn" class="newListBtn main-button">
               New Project
             </button>
-            <button id="displayAllTasksBtn" class="displayAllTasksBtn main-button">
+          </div>
+            <div id="listBtnDivSecondary" class="listBtnDivSecondary">
+              <div id="listBtnDivSecondaryOne" class="listBtnDivSecondaryOne">
+              <button
+              id="displayAllTasksBtn"
+              class="displayAllTasksBtn normal-button"
+            >
               All Tasks
             </button>
-          </div>
+              <button
+                id="displayUnassignedTasksBtn"
+                class="displayUnassignedTasksBtn normal-button"
+              >
+                Unassigned Tasks
+              </button>
+            </div>
+            <div id="listBtnDivSecondaryTwo" class="listBtnDivSecondaryTwo"></div>
+            </div>
         </div>
         <div id="listContainer" class="listContainer"></div>
       </div>

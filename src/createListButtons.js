@@ -2,6 +2,7 @@ import List from "./list.js";
 import { listManager } from "./index.js";
 import displaySideBarLists from "./displaySideBarLists.js";
 import { displayAllTasks } from "./displayAllTasks.js";
+import { displayList } from "./displayList.js";
 
 const createListButtons = () => {
   const newListBtn = document.querySelector("#newListBtn");
@@ -14,10 +15,15 @@ const createListButtons = () => {
     displayAllTasks();
   });
 
+  const displayUnassignedTasksBtn = document.querySelector("#displayUnassignedTasksBtn");
+  displayUnassignedTasksBtn.addEventListener("click", () => {
+    displayList("L10000");
+  });
+
   let sortFlag = "";
 
-  const listBtnContainer = document.querySelector("#listBtnContainer");
-  listBtnContainer.classList.add("listBtnContainer");
+  const listBtnDivSecondaryTwo = document.querySelector("#listBtnDivSecondaryTwo");
+  listBtnDivSecondaryTwo.classList.add("listBtnDivSecondaryTwo");
 
   const listBtnSubContainer = document.createElement("div");
   listBtnSubContainer.classList.add("listBtnSubContainer");
@@ -50,8 +56,7 @@ const createListButtons = () => {
     displaySideBarLists();
   });
 
-  listBtnContainer.append(listBtnSubContainer);
-  listBtnSubContainer.append(sortListsByTitleBtn, sortListsByIdBtn);
+  listBtnDivSecondaryTwo.append(sortListsByTitleBtn, sortListsByIdBtn);
 
   const sortListsAsc = (text) => {
     let sortedLists = listManager.getAllLists();
