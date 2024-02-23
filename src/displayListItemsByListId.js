@@ -4,7 +4,7 @@ import { displayList } from './displayList.js';
 
 const listItemsContainer = document.querySelector("#listItemsContainer");
 
-const displayListItems = (id) => {
+const displayListItemsByListId = (id) => {
 
     const currentListId = id;
 
@@ -175,4 +175,4 @@ const displayListItems = (id) => {
     }
 }
 
-export default displayListItems;
+export default displayListItemsByListId;

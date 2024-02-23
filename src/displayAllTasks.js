@@ -1,11 +1,70 @@
 import { listManager } from "./index.js";
-import displayListItems from "./displayListItems.js";
+import displayListItemsByListId from "./displayListItemsByListId.js";
+import displayListItemsFromArr from "./displayListItemsFromArr.js";
 import { createListItem } from "./createListItem.js";
 
 let sortFlag = "";
 
+const sortItemsAsc = (text, arr) => {
+    let sortedLists = arr;
+    sortedLists = sortedLists.sort((a, b) => {
+      if (a[text] < b[text]) {
+        return -1;
+      } else if (a[text] > b[text]) {
+        return 1;
+      }
+      return 0;
+    });
+    sortedLists.forEach((listItem) => {
+      console.log(listItem);
+    });
+    return sortedLists;
+  };
+
+  // logic for sorting items descending
+  const sortItemsDesc = (text, arr) => {
+    let sortedLists = arr;
+    sortedLists = sortedLists.sort((a, b) => {
+      if (b[text] < a[text]) {
+        return -1;
+      } else if (b[text] > a[text]) {
+        return 1;
+      }
+      return 0;
+    });
+    sortedLists.forEach((listItem) => {
+      console.log(listItem);
+    });
+    return sortedLists;
+  };
+
 const displayAllTasks = () => {
-  const lists = [...listManager.getAllLists()];
+
+
+    const itemContainerContainer = document.createElement("div");
+
+    const listItemsContainer = document.querySelector("#listItemsContainer");
+    // clear listItemsContainer
+    listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
+    listItemsContainer.innerHTML = '';
+
+    let allListItems = [];
+    listManager.getAllLists().forEach((list) => {
+      list.listItems.forEach((item) => {
+        item.listId = list.listId; // Add listId to each item
+        allListItems.push(item);
+        allListItems = allListItems.sort((a, b) => {
+            if (b.itemDueDate > a.itemDueDate) {
+                return -1;
+              } else if (b.itemDueDate < a.itemDueDate) {
+                return 1;
+              }
+              return 0;
+            });
+        })
+      });
+
+  console.log(allListItems);
 
   const noTasksMessage = document.createElement("div");
   const listTitleContainer = document.createElement("div");
@@ -21,10 +80,6 @@ const displayAllTasks = () => {
 
   let displayTitle;
   let displayListId;
-
-  const listItemsContainer = document.querySelector("#listItemsContainer");
-  // clear listItemsContainer
-  listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
 
   listItemsContainer.append(listTitleContainer, listTitleH1, listIdH1);
   listTitleContainer.append(listTitleH1, listIdH1);
@@ -51,9 +106,9 @@ const displayAllTasks = () => {
   sortByDateBtn.addEventListener("click", () => {
     if (sortFlag !== "itemDueDateAsc") {
       sortFlag = "itemDueDateAsc";
-      sortItemsDesc("itemDueDate");
+      sortItemsDesc("itemDueDate", allListItems);
     } else if (sortFlag === "itemDueDateAsc") {
-      sortItemsAsc("itemDueDate");
+      sortItemsAsc("itemDueDate", allListItems);
       sortFlag = "itemDueDateDesc";
     }
     displayAllTasks();
@@ -94,59 +149,25 @@ const displayAllTasks = () => {
 
   listItemBtnDivContainer.append(listItemSortBtnDiv);
   listItemsContainer.append(listItemBtnDivContainer);
+  listItemsContainer.append(itemContainerContainer);
 
   // loop through list to dynamically generate title and id fields, or no tasks message
-  for (let i = 0; i < lists.length; i++) {
-    if (lists.length === 0) {
+    if (allListItems.length === 0) {
         noTasksMessage.classList.add("itemContainerNoTasks");
         noTasksMessage.innerText =
           "There are currently no tasks in this project.";
         listItemsContainer.append(noTasksMessage);
       return;
-    } else if (lists.length > 0) {
+    } else if (allListItems.length > 0) {
       displayTitle = `All Tasks`;
       displayListId = "";
       listTitleH1.innerText = displayTitle;
       listIdH1.innerText = displayListId;
     }
-    if (lists[i].listItems.length > 0) {
-      displayListItems(lists[i].listId);
-    }
+    if (allListItems.length > 0) {
+      displayListItemsFromArr(allListItems);
   }
 };
 
-// logic for sorting items ascending
-const sortItemsAsc = (text) => {
-  let sortedItems = listManager.getAllItemsAllLists();
-  sortedItems = sortedItems.sort((a, b) => {
-    if (a[text] < b[text]) {
-      return -1;
-    } else if (a[text] > b[text]) {
-      return 1;
-    }
-    return 0;
-  });
-  sortedItems.forEach((listItem) => {
-    console.log(listItem);
-  });
-  return sortedItems;
-};
-
-// logic for sorting items descending
-const sortItemsDesc = (text) => {
-    let sortedItems = listManager.getAllItemsAllLists();
-  sortedItems = sortedItems.sort((a, b) => {
-    if (b[text] < a[text]) {
-      return -1;
-    } else if (b[text] > a[text]) {
-      return 1;
-    }
-    return 0;
-  });
-  sortedItems.forEach((listItem) => {
-    console.log(listItem);
-  });
-  return sortedItems;
-};
 
 export { displayAllTasks };

@@ -1,5 +1,5 @@
 import { listManager } from './index.js';
-import displayListItems from './displayListItems.js';
+import displayListItemsByListId from './displayListItemsByListId.js';
 import { createListItem } from './createListItem.js';
 
 let sortFlag = "";
@@ -118,7 +118,7 @@ const displayList = (id) => {
             listTitleH1.innerText = displayTitle;
             listIdH1.innerText = displayListId;
             if (lists[i].listItems.length > 0) {
-                displayListItems(id);
+                displayListItemsByListId(id);
             } else {
 
                 noTasksMessage.classList.add("itemContainerNoTasks");
