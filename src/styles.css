@@ -138,12 +138,6 @@ h1 {
     color: #888888;
 }
 
-.noListSelected {
-    display: flex;
-    align-items: flex-end;
-    font-size: 1em;
-}
-
 .thisList button {
     justify-self:stretch;
 }
@@ -204,7 +198,7 @@ h1 {
 }
 
 
-.listItemsContainer {
+.itemViewMain {
     grid-area: listItemsContainer;
     background-color: #BFD7D8;
     padding: 15px 15px 30px 15px;

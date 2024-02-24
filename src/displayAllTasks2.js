@@ -5,17 +5,41 @@ import { createListItem } from "./createListItem.js";
 
 const displayAllTasks2 = () => {
 
+    let displayTitle;
+    let displayListId;
+  
+  const noTasksMessage = document.createElement("div");
+  
+  const itemViewHeaderContainer = document.querySelector("#itemViewHeaderContainer");
+  const itemContainerContainer = document.querySelector("#itemContainerContainer");
+  const listTitleContainer = document.createElement("div");
+  const listTitleH1 = document.createElement("h1");
+  const listIdH1 = document.createElement("h3");
+  const listItemBtnDivContainer = document.createElement("div");
+  listItemBtnDivContainer.classList.add("listItemBtnDivContainer");
+  const listItemSortBtnDiv = document.createElement("div");
+  listItemSortBtnDiv.classList.add("listItemSortBtnDiv");
+  
+  itemViewHeaderContainer.innerHTML = "";
+  
+  const newItemBtn = document.createElement("button");
+  const sortByDateBtn = document.createElement("button");
+  const sortByItemIsCompletedBtn = document.createElement("button");
+  const sortByPriorityBtn = document.createElement("button");
+  
+    listTitleContainer.classList.add("listTitleContainer");
+  
+    itemViewMain.append(listItemBtnDivContainer);
+  
     let sortFlag = "";
     let allListItems = [];
     allListItems = listManager.getAllListItemsAllLists();
     console.log(allListItems);
     const listItemsContainer = document.querySelector("#listItemsContainer");
-    listItemsContainer.innerHTML = "";
-
-    const itemContainerContainer = document.createElement("div");
-    itemContainerContainer.classList.add("itemContainerContainer");
+    itemContainerContainer.innerHTML = "";
 
     const loopThruItems = () => {
+        itemContainerContainer.innerHTML = "";
         if (allListItems.length > 0) {
             allListItems.forEach((item) => displayListItemFromObj(item));
         }
@@ -45,30 +69,6 @@ const displayAllTasks2 = () => {
         console.log(arr);
     };
 
-    const noTasksMessage = document.createElement("div");
-    const listTitleContainer = document.createElement("div");
-    const listTitleH1 = document.createElement("h1");
-    const listIdH1 = document.createElement("h3");
-    const listItemBtnDivContainer = document.createElement("div");
-    const listItemSortBtnDiv = document.createElement("div");
-
-    const newItemBtn = document.createElement("button");
-    const sortByDateBtn = document.createElement("button");
-    const sortByPriorityBtn = document.createElement("button");
-    const sortByItemIsCompletedBtn = document.createElement("button");
-
-    let displayTitle;
-    let displayListId;
-
-    listItemsContainer.append(listTitleContainer, listTitleH1, listIdH1);
-
-    listTitleContainer.append(listTitleH1, listIdH1);
-    listTitleContainer.classList.add("listTitleContainer");
-
-    listItemBtnDivContainer.classList.add("listItemBtnDivContainer");
-
-    listItemSortBtnDiv.classList.add("listItemSortBtnDiv");
-
     // new item button
     const createNewItemBtn = () => {
         newItemBtn.classList.add("main-button");
@@ -84,7 +84,7 @@ const displayAllTasks2 = () => {
     const createSortByDateBtn = () => {
         sortByDateBtn.classList.add("normal-button");
         sortByDateBtn.innerText = "Sort By Date";
-        listItemsContainer.append(sortByDateBtn);
+        listItemSortBtnDiv.append(sortByDateBtn);
         sortByDateBtn.addEventListener("click", () => {
             if (sortFlag === "itemDueDateAsc") {
                 sortItemsDesc("itemDueDate", allListItems);
@@ -105,7 +105,7 @@ const displayAllTasks2 = () => {
     const createSortByPriorityBtn = () => {
         sortByPriorityBtn.classList.add("normal-button");
         sortByPriorityBtn.innerText = "Sort By Priority";
-        listItemsContainer.append(sortByPriorityBtn);
+        listItemSortBtnDiv.append(sortByPriorityBtn);
         sortByPriorityBtn.addEventListener("click", () => {
             if (sortFlag !== "itemPriorityDesc") {
                 sortFlag = "itemPriorityDesc";
@@ -123,7 +123,7 @@ const displayAllTasks2 = () => {
     const createSortByItemIsCompletedBtn = () => {
         sortByItemIsCompletedBtn.classList.add("normal-button");
         sortByItemIsCompletedBtn.innerText = "Sort By Completion";
-        listItemsContainer.append(sortByItemIsCompletedBtn);
+        listItemSortBtnDiv.append(sortByItemIsCompletedBtn);
         sortByItemIsCompletedBtn.addEventListener("click", () => {
             if (sortFlag !== "itemIsCompletedAsc") {
                 sortFlag = "itemIsCompletedAsc";
@@ -137,13 +137,6 @@ const displayAllTasks2 = () => {
         listItemSortBtnDiv.append(sortByItemIsCompletedBtn);
     };
 
-    createNewItemBtn();
-    createSortByDateBtn();
-    createSortByPriorityBtn();
-    createSortByItemIsCompletedBtn();
-    listItemBtnDivContainer.append(listItemSortBtnDiv);
-    listItemsContainer.append(listItemBtnDivContainer);
-
     // Loop through list to dynamically generate title and id fields, or no tasks message
     if (allListItems.length === 0) {
         noTasksMessage.classList.add("itemContainerNoTasks");
@@ -155,11 +148,24 @@ const displayAllTasks2 = () => {
         listTitleH1.innerText = displayTitle;
         listIdH1.innerText = displayListId;
     }
+
+    createNewItemBtn();
+    createSortByDateBtn();
+    createSortByItemIsCompletedBtn();
+    createSortByPriorityBtn();
+    createSortByDateBtn();
+    listTitleContainer.append(listTitleH1, listIdH1); // add list title & list id to header container
+    listItemBtnDivContainer.append(newItemBtn); // add new item button to header button main container
+    listItemSortBtnDiv.append(sortByDateBtn);
+    listItemSortBtnDiv.append(sortByItemIsCompletedBtn);
+    listItemSortBtnDiv.append(sortByPriorityBtn);
+    listItemBtnDivContainer.append(listItemSortBtnDiv); // add sort buttons to header button main container
+    itemViewHeaderContainer.append(listTitleContainer); // add title and id container to header container
+    itemViewHeaderContainer.append(listItemBtnDivContainer); // add buttons to header container
+
     sortItemsAsc(); // default ascending data sort on component load
     loopThruItems(); // initial load of listItems for display
 
-    // Append itemContainerContainer to listItemsContainer after the loop
-    listItemsContainer.append(itemContainerContainer);
 };
 
 export { displayAllTasks2 };

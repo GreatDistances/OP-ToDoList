@@ -8,7 +8,7 @@ const displayListItemFromObj = (item) => {
     let listIdArr = listManager.getAllListIds();
     let listTitlesArr = listManager.getAllListTitles();
 
-        const itemContainerContainer = document.createElement("div");
+        const itemContainerContainer = document.querySelector("#itemContainerContainer");
         itemContainerContainer.classList.add("itemContainerContainer");
 
         // parent of itemIsCompletedCheckBoxDiv, itemContainer, deleteItemBtnContainer
@@ -29,10 +29,6 @@ const displayListItemFromObj = (item) => {
         const deleteItemBtnContainer = document.createElement("div");
         deleteItemBtnContainer.classList.add("deleteItemBtnContainer");
         itemContainer.append(deleteItemBtnContainer);
-
-        const listItemsContainer = document.querySelector("#listItemsContainer");
-        listItemsContainer.append(itemContainerContainer)
-        itemContainerContainer.append(itemContainer);
 
         const createTextField = (text, container, method) => {
             const value = item[text];
@@ -151,14 +147,7 @@ const displayListItemFromObj = (item) => {
         itemIsCompletedCheckBoxDiv.append(itemIsCompletedCheckbox);
     }
 
-        createItemIsCompletedCheckbox();
-        createTextField("itemTitle", itemFieldsContainer, "setItemTitle");
-        createTextField("itemDescription", itemFieldsContainer, "setItemDescription");
-        //createTextField("itemNotes", itemFieldsContainer, "setItemNotes");
-        createSelectListId("listId", itemFieldsContainer, "setItemToDifferentList");
-        createDateField("itemDueDate", itemFieldsContainer, "setItemDueDate");
-        createSelectPriority("itemPriority", itemFieldsContainer, "setItemPriority");
-
+    const createDeleteItemBtn = () => {
         const deleteItemBtn = document.createElement("button");
         deleteItemBtn.innerText = "X";
         deleteItemBtn.classList.add("deleteBtn");
@@ -168,6 +157,18 @@ const displayListItemFromObj = (item) => {
         })
         deleteItemBtnContainer.append(deleteItemBtn);
         itemContainer.append(deleteItemBtnContainer);
+    }
+
+        createItemIsCompletedCheckbox();
+        createTextField("itemTitle", itemFieldsContainer, "setItemTitle");
+        createTextField("itemDescription", itemFieldsContainer, "setItemDescription");
+        //createTextField("itemNotes", itemFieldsContainer, "setItemNotes");
+        createSelectListId("listId", itemFieldsContainer, "setItemToDifferentList");
+        createDateField("itemDueDate", itemFieldsContainer, "setItemDueDate");
+        createSelectPriority("itemPriority", itemFieldsContainer, "setItemPriority");
+        createDeleteItemBtn();
+        itemContainerContainer.append(itemContainer);
+
 }
 
 export {displayListItemFromObj}

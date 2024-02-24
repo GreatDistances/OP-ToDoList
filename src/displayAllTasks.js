@@ -3,9 +3,9 @@ import displayListItemsByListId from "./displayListItemsByListId.js";
 import displayListItemsFromArr from "./displayListItemsFromArr.js";
 import { createListItem } from "./createListItem.js";
 
-const displayAllTasks = () => {
+let sortFlag = "";
 
-  let sortFlag = "";
+const displayAllTasks = () => {
 
   const sortItemsAsc = (property = "itemDueDate", arr = allListItems) => {
     arr.sort((a, b) => {
@@ -31,7 +31,7 @@ const displayAllTasks = () => {
     console.log(arr);
   };
 
-  const itemContainerContainer = document.createElement("div");
+  const itemContainerContainer = document.querySelector("#itemContainerContainer");
 
   const listItemsContainer = document.querySelector("#listItemsContainer");
   listItemsContainer.replaceChildren();
