@@ -84,6 +84,7 @@ const displayAllTasks2 = () => {
         newItemBtn.innerText = "New Task";
         newItemBtn.addEventListener("click", () => {
             listManager.addListItem(createListItem(), "L10000");
+            allListItems = listManager.getAllListItemsAllLists();
             displayAllTasks2();
         });
         listItemBtnDivContainer.append(newItemBtn);
@@ -169,7 +170,6 @@ const displayAllTasks2 = () => {
     itemViewHeaderContainer.append(listTitleContainer); // add title and id container to header container
     itemViewHeaderContainer.append(listItemBtnDivContainer); // add buttons to header container
 
-    sortItemsAsc(); // default ascending data sort on component load
     loopThruItems(); // initial load of listItems for display
 
 };

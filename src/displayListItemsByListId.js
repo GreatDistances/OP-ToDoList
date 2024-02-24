@@ -82,7 +82,7 @@ const displayListItemsByListId = (id) => {
         const br = document.createElement("br");
         const label = document.createElement("label");
         label.classList.add("listItemLabel");
-        label.innerText = "Due Date";
+        label.innerText = arr[i].itemId; // TODO - change back to "Due Date"
         cell.setAttribute("type", "date");
         cell.value = value;
         cell.onblur = () => {

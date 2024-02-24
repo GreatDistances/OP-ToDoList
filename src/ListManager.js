@@ -140,8 +140,8 @@ class ListManager {
         this.listRepository[i].listItems.unshift(itemObj);
       }
     }
+    localStorage.setItem("newItemId", ListItem.newItemId);
     this.saveToLocalStorage();
-    localStorage.setItem("newListId", List.newListId);
   }
 
   deleteItem(itemId, listId) {
@@ -269,6 +269,7 @@ class ListManager {
   }
 
   setItemToDifferentList(itemId, currentListId, newListId) {
+    console.log("setItemToDifferentList", itemId, currentListId, newListId);
     if (currentListId === newListId) {
       return;
     }

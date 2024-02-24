@@ -10,8 +10,8 @@ let listManager;
 const initializeApp = () => {
   displaySideBarLists(); // display all available lists
   createListButtons();
-  displayAllTasks2(); // initialize app to All Tasks list
-
+  displayList("L10000") // initialize app to unassigned tasks
+  displayAllTasks2(); // initialize app to All Tasks list - THIS IS BUGGY IF displayList("L10000") (or another known listId is not called first.  "setCurrentListId" is probably the issue.
 };
 
 const loadLocalStorage = () => {

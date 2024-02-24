@@ -3,7 +3,6 @@ import { displayAllTasks2 } from './displayAllTasks2.js';
 
 const displayListItemFromObj = (item) => {
 
-    console.log("fromOb");
     console.log(item);
 
     let listIdArr = listManager.getAllListIds();
@@ -73,7 +72,7 @@ const displayListItemFromObj = (item) => {
             const br = document.createElement("br");
             const label = document.createElement("label");
             label.classList.add("listItemLabel");
-            label.innerText = "Due Date";
+            label.innerText = item.itemId; // TO DO - change back to "Due Date"
             cell.setAttribute("type", "date");
             cell.value = value;
             cell.onchange = () => {
