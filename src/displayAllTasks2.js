@@ -5,17 +5,21 @@ import { createListItem } from "./createListItem.js";
 
 const displayAllTasks2 = () => {
 
+    let sortFlag = "";
+    let allListItems = [];
+    allListItems = listManager.getAllListItemsAllLists();
+    console.log(allListItems);
+    const listItemsContainer = document.querySelector("#listItemsContainer");
+    listItemsContainer.innerHTML = "";
+
     const itemContainerContainer = document.createElement("div");
     itemContainerContainer.classList.add("itemContainerContainer");
 
     const loopThruItems = () => {
-        itemContainerContainer.innerHTML = "";
         if (allListItems.length > 0) {
             allListItems.forEach((item) => displayListItemFromObj(item));
         }
     };
-
-    let sortFlag = "";
 
     const sortItemsAsc = (property = "itemDueDate", arr = allListItems) => {
         arr.sort((a, b) => {
@@ -40,17 +44,6 @@ const displayAllTasks2 = () => {
         });
         console.log(arr);
     };
-
-    let allListItems = [];
-    allListItems = listManager.getAllListItemsAllLists();
-    console.log(allListItems);
-
-
-
-    const listItemsContainer = document.querySelector("#listItemsContainer");
-    listItemsContainer.innerHTML = "";
-
-    console.log(allListItems);
 
     const noTasksMessage = document.createElement("div");
     const listTitleContainer = document.createElement("div");
@@ -121,7 +114,6 @@ const displayAllTasks2 = () => {
                 sortItemsAsc("itemPriority", allListItems);
                 sortFlag = "itemPriorityAsc";
             }
-            itemContainerContainer.innerHTML = "";
             loopThruItems();
         });
         listItemSortBtnDiv.append(sortByPriorityBtn);
@@ -140,7 +132,6 @@ const displayAllTasks2 = () => {
                 sortItemsDesc("itemIsCompleted", allListItems);
                 sortFlag = "itemIsCompletedDesc";
             }
-            itemContainerContainer.innerHTML = "";
             loopThruItems();
         });
         listItemSortBtnDiv.append(sortByItemIsCompletedBtn);
