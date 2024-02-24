@@ -2,6 +2,7 @@ import ListManager from "./ListManager.js";
 import List from "./list.js";
 import displaySideBarLists from "./displaySideBarLists.js";
 import { displayList } from "./displayList.js";
+import { displayAllTasks2 } from "./displayAllTasks2.js";
 import createListButtons from './createListButtons.js';
 
 let listManager;
@@ -9,7 +10,7 @@ let listManager;
 const initializeApp = () => {
   displaySideBarLists(); // display all available lists
   createListButtons();
-  displayList("L10000"); // initialize app to unassigned tasks list
+  displayAllTasks2(); // initialize app to All Tasks list
 
 };
 

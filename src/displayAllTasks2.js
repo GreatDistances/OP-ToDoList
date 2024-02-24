@@ -35,12 +35,21 @@ const displayAllTasks2 = () => {
     let allListItems = [];
     allListItems = listManager.getAllListItemsAllLists();
     console.log(allListItems);
-    const listItemsContainer = document.querySelector("#listItemsContainer");
     itemContainerContainer.innerHTML = "";
+
+    displayTitle = `All Tasks`;
+    displayListId = "";
+    listTitleH1.innerText = displayTitle;
+    listIdH1.innerText = displayListId;
 
     const loopThruItems = () => {
         itemContainerContainer.innerHTML = "";
-        if (allListItems.length > 0) {
+      if (allListItems.length < 1) {
+        noTasksMessage.classList.add("itemContainerNoTasks");
+        noTasksMessage.innerText =
+          "There are currently no tasks in the system.";
+        itemContainerContainer.append(noTasksMessage);
+      } else {
             allListItems.forEach((item) => displayListItemFromObj(item));
         }
     };
@@ -75,7 +84,7 @@ const displayAllTasks2 = () => {
         newItemBtn.innerText = "New Task";
         newItemBtn.addEventListener("click", () => {
             listManager.addListItem(createListItem(), "L10000");
-            loopThruItems();
+            displayAllTasks2();
         });
         listItemBtnDivContainer.append(newItemBtn);
     };
@@ -141,12 +150,9 @@ const displayAllTasks2 = () => {
     if (allListItems.length === 0) {
         noTasksMessage.classList.add("itemContainerNoTasks");
         noTasksMessage.innerText = "There are currently no tasks in this project.";
-        listItemsContainer.append(noTasksMessage);
+        itemContainerContainer.append(noTasksMessage);
     } else if (allListItems.length > 0) {
-        displayTitle = `All Tasks`;
-        displayListId = "";
-        listTitleH1.innerText = displayTitle;
-        listIdH1.innerText = displayListId;
+
     }
 
     createNewItemBtn();

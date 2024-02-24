@@ -37,19 +37,6 @@ const sortByPriorityBtn = document.createElement("button");
 
   listItemSortBtnDiv.classList.add("listItemSortBtnDiv");
 
-  // if no listId is selected, display text that requests user add or select a project
-/*   const checkForValidListId = (id) => {
-  if (!id || id === -1) {
-    itemViewMain.innerText = "Add or Select a Project";
-    itemViewMain.classList.add("noListSelected");
-    return;
-  } else {
-    itemViewMain.classList.remove("noListSelected");
-}
-}  */
-
-
-
   // new item button
   const createNewItemBtn = () => {
     newItemBtn.classList.add("main-button");
@@ -136,19 +123,16 @@ const sortByPriorityBtn = document.createElement("button");
       listIdH1.innerText = displayListId;
       if (lists[i].listItems.length > 0) {
         displayListItemsByListId(id);
-      //} else {
-      //  noTasksMessage.classList.add("itemContainerNoTasks");
-      //  noTasksMessage.innerText =
-      //    "There are currently no tasks in this project.";
-      //  itemContainerContainer.append(noTasksMessage);
+      } else {
+        noTasksMessage.classList.add("itemContainerNoTasks");
+        noTasksMessage.innerText =
+          "There are currently no tasks in this project.";
+        itemContainerContainer.append(noTasksMessage);
       }
     }
     }
   }
- 
 
-
-  //checkForValidListId();
   createNewItemBtn();
   createSortByDateBtn();
   createSortByItemIsCompletedBtn();
@@ -162,7 +146,8 @@ const sortByPriorityBtn = document.createElement("button");
   listItemBtnDivContainer.append(listItemSortBtnDiv); // add sort buttons to header button main container
   itemViewHeaderContainer.append(listTitleContainer); // add title and id container to header container
   itemViewHeaderContainer.append(listItemBtnDivContainer); // add buttons to header container
-  itemViewMain.append(itemViewHeaderContainer); // add header to main view
+
+
   loopThruList();
 
 };

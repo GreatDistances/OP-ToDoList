@@ -1,4 +1,5 @@
 import { listManager } from './index.js';
+import { displayAllTasks2 } from './displayAllTasks2.js';
 
 const displayListItemFromObj = (item) => {
 
@@ -75,9 +76,10 @@ const displayListItemFromObj = (item) => {
             label.innerText = "Due Date";
             cell.setAttribute("type", "date");
             cell.value = value;
-            cell.change = () => {
+            cell.onchange = () => {
+                console.log(cell.value);
+                console.log(item.itemId);
                 listManager[method](item.itemId, cell.value); // sets value in listManager
-                displayAllTasks2();
             }
             cellContainer.append(cell, br, label);
             container.append(cellContainer);
@@ -130,7 +132,6 @@ const displayListItemFromObj = (item) => {
             cell.value = value;
             cell.onchange = () => {
                 listManager[method](item.itemId, item.listId, cell.value); // sets value in listManager
-                displayAllTasks2();
             }
             cellContainer.append(cell, br, label);
             container.append(cellContainer);
@@ -152,6 +153,8 @@ const displayListItemFromObj = (item) => {
         deleteItemBtn.innerText = "X";
         deleteItemBtn.classList.add("deleteBtn");
         deleteItemBtn.addEventListener("click", () => {
+            console.log(item.itemId);
+            console.log(item.listId);
             listManager.deleteItem(item.itemId, item.listId);
             displayAllTasks2();
         })
