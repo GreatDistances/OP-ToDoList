@@ -192,8 +192,13 @@ class ListManager {
   getAllListItemsAllLists() {
     let allListItems = [];
     this.listRepository.forEach(list => {
-        allListItems = allListItems.concat(list.listItems);
+        list.listItems.forEach(item => {
+            // Add listId property to each item
+            const listItemWithListId = { ...item, listId: list.listId };
+            allListItems.push(listItemWithListId);
+        });
     });
+    console.log(allListItems);
     return allListItems;
 }
 

@@ -1,7 +1,7 @@
 import List from "./list.js";
 import { listManager } from "./index.js";
 import displaySideBarLists from "./displaySideBarLists.js";
-import { displayAllTasks } from "./displayAllTasks.js";
+import { displayAllTasks2 } from "./displayAllTasks2.js";
 import { displayList } from "./displayList.js";
 
 const createListButtons = () => {
@@ -12,7 +12,7 @@ const createListButtons = () => {
 
   const displayAllTasksBtn = document.querySelector("#displayAllTasksBtn");
   displayAllTasksBtn.addEventListener("click", () => {
-    displayAllTasks();
+    displayAllTasks2();
   });
 
   const displayUnassignedTasksBtn = document.querySelector("#displayUnassignedTasksBtn");
