@@ -157,7 +157,7 @@ const displayAllTasks2 = () => {
   } else if (allListItems.length > 0) {
   }
 
-  sortItemsAsc("itemDueDate", allListItems);
+  sortItemsDesc("itemId", allListItems); // TODO - improved logic would be to copy the array, then unshift new item to it.
   createNewItemBtn();
   createSortByDateBtn();
   createSortByItemIsCompletedBtn();
