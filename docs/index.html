@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>To Do List</title>
+  <script defer src="styles.js"></script></head>
+  <body>
+    <main>
+      <div id="header" class="header">
+        <div class="logo">
+          <h3>OnTask</h3>
+        </div>
+      </div>
+      <div id="sideBar" class="sideBar">
+        <h1>Projects</h1>
+        <div id="listBtnContainer" class="listBtnContainer">
+          <div id="listBtnDivPrimary" class="listBtnDivPrimary">          
+            <button id="newListBtn" class="newListBtn main-button">
+              New Project
+            </button>
+          </div>
+            <div id="listBtnDivSecondary" class="listBtnDivSecondary">
+              <div id="listBtnDivSecondaryOne" class="listBtnDivSecondaryOne">
+              <button
+              id="displayAllTasksBtn"
+              class="displayAllTasksBtn normal-button-plus"
+            >
+              All Tasks
+            </button>
+              <button
+                id="displayUnassignedTasksBtn"
+                class="displayUnassignedTasksBtn normal-button-plus"
+              >
+                Unassigned Tasks
+              </button>
+            </div>
+            <div id="listBtnDivSecondaryTwo" class="listBtnDivSecondaryTwo"></div>
+            </div>
+        </div>
+        <div id="listContainer" class="listContainer"></div>
+      </div>
+      <div id="itemViewMain" class="itemViewMain">
+        <div id="itemViewHeaderContainer" class="itemViewHeaderContainer"></div>
+        <div id="itemContainerContainer" class="itemContainerContainer"></div>
+      </div>
+      <footer id="footer" class="footer">
+        <a href="https://github.com/GreatDistances">© 2024, Matthew P. Wicks</a>
+      </footer>
+    </main>
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
