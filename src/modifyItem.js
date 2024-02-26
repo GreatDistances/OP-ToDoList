@@ -1,4 +1,4 @@
-import { listManager } from './index.js';
+/* import { listManager } from './index.js';
 import {displayList} from './displayList.js';
 
 const sendMsg = (msg) => {
@@ -146,4 +146,4 @@ const setItemDueDate = (id, year, month, day = "") => {
     sendMsg(`Item ID# ${id} ${key} changed to "${dateEntry}"`);
 }
 
-export {setItemTitle, setItemDescription, setItemPriority, setItemNotes, setItemDueDate};
+export {setItemTitle, setItemDescription, setItemPriority, setItemNotes, setItemDueDate}; */

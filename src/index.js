@@ -4,14 +4,13 @@ import displaySideBarLists from "./displaySideBarLists.js";
 import { displayList } from "./displayList.js";
 import { displayAllTasks2 } from "./displayAllTasks2.js";
 import createListButtons from './createListButtons.js';
-import "./styles.css";
 
 let listManager;
 
 const initializeApp = () => {
   displaySideBarLists(); // display all available lists
   createListButtons();
-  displayList("L10000") // initialize app to unassigned tasks
+  //displayList("L10000") // initialize app to unassigned tasks
   displayAllTasks2(); // initialize app to All Tasks list - THIS IS BUGGY IF displayList("L10000") (or another known listId is not called first.  "setCurrentListId" is probably the issue.
 };
 

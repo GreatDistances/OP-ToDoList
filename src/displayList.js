@@ -44,7 +44,7 @@ const sortByPriorityBtn = document.createElement("button");
     newItemBtn.addEventListener("click", () => {
       const currentListId = listManager.getCurrentListId();
       listManager.addListItem(createListItem(), currentListId);
-      displayList(currentListId);
+      displayListItemsByListId(currentListId);
     });
     listItemBtnDivContainer.append(newItemBtn);
   };
@@ -61,9 +61,8 @@ const sortByPriorityBtn = document.createElement("button");
             sortItemsAsc("itemDueDate");
             sortFlag = "itemDueDateDesc";
         };
-        displayList(listManager.getCurrentListId());
+        loopThruList();
     });
-
     listItemSortBtnDiv.append(sortByDateBtn);
   };
 
@@ -80,17 +79,15 @@ const sortByPriorityBtn = document.createElement("button");
         sortItemsAsc("itemPriority");
         sortFlag = "itemPriorityAsc";
       }
-      displayList(listManager.getCurrentListId());
+      loopThruList();
     });
     listItemSortBtnDiv.append(sortByPriorityBtn);
   };
 
   // sort by is completed button
   const createSortByItemIsCompletedBtn = () => {
-
     sortByItemIsCompletedBtn.classList.add("normal-button");
     sortByItemIsCompletedBtn.innerText = "Sort By Completion";
-
     sortByItemIsCompletedBtn.addEventListener("click", () => {
       if (sortFlag !== "itemIsCompletedAsc") {
         sortFlag = "itemIsCompletedAsc";
@@ -99,7 +96,7 @@ const sortByPriorityBtn = document.createElement("button");
         sortItemsDesc("itemIsCompleted");
         sortFlag = "itemIsCompletedDesc";
       }
-      displayList(listManager.getCurrentListId());
+      loopThruList();
     });
     listItemSortBtnDiv.append(sortByItemIsCompletedBtn);
   };
@@ -108,10 +105,6 @@ const sortByPriorityBtn = document.createElement("button");
   const loopThruList = () => {
     itemContainerContainer.innerHTML = "";
   for (let i = 0; i < lists.length; i++) {
-    if (lists.length === 0) {
-      console.log("no lists");
-      return;
-    }
     if (lists[i].listId === id) {
       if (lists[i].listTitle === "") {
         displayTitle = "Untitled Project";
@@ -137,7 +130,6 @@ const sortByPriorityBtn = document.createElement("button");
   createSortByDateBtn();
   createSortByItemIsCompletedBtn();
   createSortByPriorityBtn();
-  createSortByDateBtn();
   listTitleContainer.append(listTitleH1, listIdH1); // add list title & list id to header container
   listItemBtnDivContainer.append(newItemBtn); // add new item button to header button main container
   listItemSortBtnDiv.append(sortByDateBtn);
@@ -146,7 +138,6 @@ const sortByPriorityBtn = document.createElement("button");
   listItemBtnDivContainer.append(listItemSortBtnDiv); // add sort buttons to header button main container
   itemViewHeaderContainer.append(listTitleContainer); // add title and id container to header container
   itemViewHeaderContainer.append(listItemBtnDivContainer); // add buttons to header container
-
 
   loopThruList();
 

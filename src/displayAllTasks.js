@@ -1,4 +1,4 @@
-import { listManager } from "./index.js";
+/* import { listManager } from "./index.js";
 import displayListItemsByListId from "./displayListItemsByListId.js";
 import displayListItemsFromArr from "./displayListItemsFromArr.js";
 import { createListItem } from "./createListItem.js";
@@ -36,7 +36,7 @@ const displayAllTasks = () => {
   const listItemsContainer = document.querySelector("#listItemsContainer");
   listItemsContainer.replaceChildren();
   // clear listItemsContainer
-  listItemsContainer.replaceChildren(); // TODO:  update later to show multiple lists at a time.
+  listItemsContainer.replaceChildren();
   listItemsContainer.innerHTML = "";
 
   let allListItems = [];
@@ -163,3 +163,4 @@ const createSortByDateBtn = () => {
 };
 
 export { displayAllTasks };
+ */
