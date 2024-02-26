@@ -162,7 +162,9 @@ const displayListItemFromObj = (item) => {
     itemIsCompletedCheckbox.setAttribute("type", "checkbox");
     itemIsCompletedCheckbox.checked = item.itemIsCompleted;
     itemIsCompletedCheckbox.addEventListener("click", () => {
-      item.itemIsCompleted = !item.itemIsCompleted;
+      listManager.setCurrentListId(item.listId);
+      console.log(item.listId);
+      listManager.setItemIsCompleted(item.itemId);
     });
     itemIsCompletedCheckBoxDiv.classList.add("itemIsCompletedCheckBoxDiv");
     itemIsCompletedCheckBoxDiv.append(itemIsCompletedCheckbox);

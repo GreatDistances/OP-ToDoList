@@ -268,6 +268,21 @@ class ListManager {
     this.saveToLocalStorage();
   }
 
+  setItemIsCompleted(itemId) {
+    const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+    const itemIndex = this.getListItemIndex(itemId);
+    console.log(listIndex);
+    console.log(itemIndex);
+    if (listIndex !== -1 && itemIndex !== -1) {
+      if (this.listRepository[listIndex].listItems[itemIndex].itemIsCompleted === false) {
+        this.listRepository[listIndex].listItems[itemIndex].itemIsCompleted = true;
+      } else {
+        this.listRepository[listIndex].listItems[itemIndex].itemIsCompleted = false;
+    }
+    this.saveToLocalStorage();
+  }
+  }
+
   setItemToDifferentList(itemId, currentListId, newListId) {
     console.log("setItemToDifferentList", itemId, currentListId, newListId);
     if (currentListId === newListId) {
