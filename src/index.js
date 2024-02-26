@@ -4,6 +4,7 @@ import displaySideBarLists from "./displaySideBarLists.js";
 import { displayList } from "./displayList.js";
 import { displayAllTasks2 } from "./displayAllTasks2.js";
 import createListButtons from './createListButtons.js';
+import "./styles.css";
 
 let listManager;
 
