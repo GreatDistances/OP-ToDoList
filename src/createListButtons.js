@@ -1,7 +1,7 @@
 import List from "./list.js";
 import { listManager } from "./index.js";
 import displaySideBarLists from "./displaySideBarLists.js";
-import { displayAllTasks2 } from "./displayAllTasks2.js";
+import { displayAllTasks } from "./displayAllTasks.js";
 import { displayList } from "./displayList.js";
 
 const createListButtons = () => {
@@ -12,7 +12,7 @@ const createListButtons = () => {
 
   const displayAllTasksBtn = document.querySelector("#displayAllTasksBtn");
   displayAllTasksBtn.addEventListener("click", () => {
-    displayAllTasks2();
+    displayAllTasks();
   });
 
   const displayUnassignedTasksBtn = document.querySelector("#displayUnassignedTasksBtn");
@@ -68,9 +68,9 @@ const createListButtons = () => {
       }
       return 0;
     });
-    sortedLists.forEach((listItem) => {
+/*     sortedLists.forEach((listItem) => {
       console.log(listItem);
-    });
+    }); */
     return sortedLists;
   };
 
@@ -85,9 +85,9 @@ const createListButtons = () => {
       }
       return 0;
     });
-    sortedLists.forEach((listItem) => {
+/*     sortedLists.forEach((listItem) => {
       console.log(listItem);
-    });
+    }); */
     return sortedLists;
   };
 };

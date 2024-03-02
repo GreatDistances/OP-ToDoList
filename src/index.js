@@ -1,17 +1,15 @@
 import ListManager from "./ListManager.js";
-import List from "./list.js";
 import displaySideBarLists from "./displaySideBarLists.js";
-import { displayList } from "./displayList.js";
-import { displayAllTasks2 } from "./displayAllTasks2.js";
+import { displayAllTasks } from "./displayAllTasks.js";
 import createListButtons from './createListButtons.js';
+// import "./styles.css" // uncomment for workaround for generating styles.css in dist folder
 
 let listManager;
 
 const initializeApp = () => {
-  displaySideBarLists(); // display all available lists
+  displaySideBarLists();
   createListButtons();
-  //displayList("L10000") // initialize app to unassigned tasks
-  displayAllTasks2(); // initialize app to All Tasks list - THIS IS BUGGY IF displayList("L10000") (or another known listId is not called first.  "setCurrentListId" is probably the issue.
+  displayAllTasks();
 };
 
 const loadLocalStorage = () => {

@@ -1,9 +1,8 @@
 import List from "./list.js";
 import ListItem from "./ListItem.js";
-import { createListItem } from "./createListItem.js";
 import displaySideBarLists from "./displaySideBarLists.js";
 import { displayList } from "./displayList.js";
-import { focusListTitle, focusItemTitle } from "./focus.js";
+import { focusListTitle } from "./focus.js";
 
 class ListManager {
   constructor() {
@@ -56,8 +55,8 @@ class ListManager {
     const listManagerFromStorage = localStorage.getItem("ListManager");
     const listManagerData = JSON.parse(listManagerFromStorage);
     this.listManager = new ListManager();
-    Object.assign(listManager, listManagerData);
-    console.log("ListManager loaded from localStorage:", listManager);
+    Object.assign(this.listManager, listManagerData);
+    console.log("ListManager loaded from localStorage:", this.listManager);
   }
 
   getAllLists() {
@@ -86,14 +85,14 @@ class ListManager {
   getCurrentListIndex() {
     const listId = this.getCurrentListId();
     if (listId === -1) {
-      return;
+      console.log(`No current list index found`);
+      return -1;
     }
     const index = this.listRepository.map((e) => e.listId).indexOf(listId);
     return index;
   }
 
   findListIndex(listId) {
-    console.log(listId);
     const index = this.listRepository.map((e) => e.listId).indexOf(listId);
     if (index === -1) {
       console.log(`List ID# ${listId} not found, no list index available`);
@@ -102,17 +101,13 @@ class ListManager {
   }
 
   addNewList(listObj) {
-    this.listRepository.unshift(listObj);
-    displaySideBarLists();
-    this.setCurrentListId(listObj.listId);
+    this.listRepository.unshift(listObj); // add new listObj to front of array
+    displaySideBarLists(); // re-render sidebar lists after new list is added
+    this.setCurrentListId(listObj.listId); // set currentListId to the new list's id
     this.saveToLocalStorage();
-    const newItem = createListItem();
-    this.addListItem(newItem, true);
-    displayList(this.getCurrentListId());
-    console.log(listObj.listId);
-    focusListTitle(listObj.listId);
-    this.setCurrentListId(listObj.listId);
-    localStorage.setItem("newListId", List.newListId);
+    displayList(this.getCurrentListId()); // display the new list as current list
+    focusListTitle(listObj.listId); // focus the new list's title input
+    localStorage.setItem("newListId", List.newListId); // update localStorage with incremented newListId
   }
 
   deleteList(id) {
@@ -121,15 +116,13 @@ class ListManager {
       return;
     }
     const index = this.findListIndex(id);
-    index !== -1
-      ? (this.listRepository.splice(index, 1),
-        console.log(`List ID# ${id} deleted`))
-      : console.log(`List ID # ${id} not found for delete`);
-    displaySideBarLists();
-    if (this.listRepository.length === 0) {
-      displayList(-1);
+    if (index === -1) {
+      console.log(`List ID # ${id} not found for delete`);
+      return;
     } else {
-      displayList(this.setCurrentListId(this.listRepository[0].listId));
+      this.listRepository.splice(index, 1);
+      console.log(`List ID# ${id} deleted`)
+      displaySideBarLists(); // re-render sidebar lists after list is deleted;
     }
     this.saveToLocalStorage();
   }
@@ -171,7 +164,6 @@ class ListManager {
     }
     this.listRepository[index].listTitle = newTitle;
     console.log(`List ID# ${listId} listTitle updated to ${newTitle}`);
-    console.log(this.listRepository);
     displaySideBarLists();
     this.saveToLocalStorage();
   }
@@ -189,16 +181,16 @@ class ListManager {
     return itemIndex;
   }
 
+  // this getter adds a listId property to each listItem, for use in "All Tasks" view
   getAllListItemsAllLists() {
     let allListItems = [];
     this.listRepository.forEach(list => {
         list.listItems.forEach(item => {
             // Add listId property to each item
-            const listItemWithListId = { ...item, listId: list.listId };
-            allListItems.push(listItemWithListId);
+            const listItemWithListId = { ...item, listId: list.listId }; // destructure object, add new listId property
+            allListItems.push(listItemWithListId); // push new objects into allListItems array
         });
     });
-    console.log(allListItems);
     return allListItems;
 }
 
@@ -208,19 +200,17 @@ class ListManager {
     if (listItemsArr.length < 1) {
       return -1;
     }
-    //console.log(listItemsArr);
     return listItemsArr;
   }
 
   getListItem(listId, itemId) {
     const allListItems = this.getAllListItems(listId);
     const listItem = allListItems.find((element) => element.itemId === itemId);
-    console.log(listItem);
     return(listItem);
   }
 
   setItemTitle(itemId, newTitle) {
-    const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+    const listIndex = this.getCurrentListIndex();
     const itemIndex = this.getListItemIndex(itemId);
     if (listIndex !== -1 && itemIndex !== -1) {
       this.listRepository[listIndex].listItems[itemIndex].itemTitle = newTitle;
@@ -229,7 +219,7 @@ class ListManager {
   }
 
   setItemDescription(itemId, newDescription) {
-    const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+    const listIndex = this.getCurrentListIndex();
     const itemIndex = this.getListItemIndex(itemId);
     if (listIndex !== -1 && itemIndex !== -1) {
       this.listRepository[listIndex].listItems[itemIndex].itemDescription =
@@ -239,8 +229,7 @@ class ListManager {
   }
 
   setItemDueDate(itemId, newDueDate) {
-    console.log("due date")
-    const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+    const listIndex = this.getCurrentListIndex();
     const itemIndex = this.getListItemIndex(itemId);
     if (listIndex !== -1 && itemIndex !== -1) {
       this.listRepository[listIndex].listItems[itemIndex].itemDueDate =
@@ -250,7 +239,7 @@ class ListManager {
   }
 
   setItemPriority(itemId, newPriority) {
-    const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+    const listIndex = this.getCurrentListIndex();
     const itemIndex = this.getListItemIndex(itemId);
     if (listIndex !== -1 && itemIndex !== -1) {
       this.listRepository[listIndex].listItems[itemIndex].itemPriority =
@@ -260,7 +249,7 @@ class ListManager {
   }
 
   setItemNotes(itemId, newNotes) {
-    const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+    const listIndex = this.getCurrentListIndex();
     const itemIndex = this.getListItemIndex(itemId);
     if (listIndex !== -1 && itemIndex !== -1) {
       this.listRepository[listIndex].listItems[itemIndex].itemNotes = newNotes;
@@ -269,10 +258,8 @@ class ListManager {
   }
 
   setItemIsCompleted(itemId) {
-    const listIndex = this.getCurrentListIndex(); // TODO - change to reference current view?
+    const listIndex = this.getCurrentListIndex();
     const itemIndex = this.getListItemIndex(itemId);
-    console.log(listIndex);
-    console.log(itemIndex);
     if (listIndex !== -1 && itemIndex !== -1) {
       if (this.listRepository[listIndex].listItems[itemIndex].itemIsCompleted === false) {
         this.listRepository[listIndex].listItems[itemIndex].itemIsCompleted = true;
@@ -284,7 +271,6 @@ class ListManager {
   }
 
   setItemToDifferentList(itemId, currentListId, newListId) {
-    console.log("setItemToDifferentList", itemId, currentListId, newListId);
     if (currentListId === newListId) {
       return;
     }

@@ -2,6 +2,9 @@ import { listManager } from "./index.js";
 import displayListItemsByListId from "./displayListItemsByListId.js";
 import { createListItem } from "./createListItem.js";
 
+// NOTE:  This module renders views of individual lists, by use of displayListItemsByListId.js module.
+// This code is slightly distinct from code in "displayAllTasks" and "displayListItemFromObj", which are used to render "All Tasks" view.
+
 let sortFlag = "";
 
 const displayList = (id) => {
@@ -33,8 +36,6 @@ const sortByPriorityBtn = document.createElement("button");
 
   listTitleContainer.classList.add("listTitleContainer");
 
-  itemViewMain.append(listItemBtnDivContainer);
-
   listItemSortBtnDiv.classList.add("listItemSortBtnDiv");
 
   // new item button
@@ -60,7 +61,7 @@ const sortByPriorityBtn = document.createElement("button");
         } else if (sortFlag === "itemDueDateAsc") {
             sortItemsAsc("itemDueDate");
             sortFlag = "itemDueDateDesc";
-        };
+        }
         loopThruList();
     });
     listItemSortBtnDiv.append(sortByDateBtn);
@@ -126,6 +127,7 @@ const sortByPriorityBtn = document.createElement("button");
     }
   }
 
+  // render page view with buttons and DOM elements
   createNewItemBtn();
   createSortByDateBtn();
   createSortByItemIsCompletedBtn();
@@ -138,7 +140,7 @@ const sortByPriorityBtn = document.createElement("button");
   listItemBtnDivContainer.append(listItemSortBtnDiv); // add sort buttons to header button main container
   itemViewHeaderContainer.append(listTitleContainer); // add title and id container to header container
   itemViewHeaderContainer.append(listItemBtnDivContainer); // add buttons to header container
-
+  // loopThruList of listItems
   loopThruList();
 
 };
@@ -155,9 +157,9 @@ const sortItemsAsc = (text) => {
     }
     return 0;
   });
-  sortedItems.forEach((listItem) => {
+/*   sortedItems.forEach((listItem) => {
     console.log(listItem);
-  });
+  }); */
   return sortedItems;
 };
 
@@ -173,10 +175,10 @@ const sortItemsDesc = (text) => {
     }
     return 0;
   });
-  sortedItems.forEach((listItem) => {
+/*   sortedItems.forEach((listItem) => {
     console.log(listItem);
-  });
+  }); */
   return sortedItems;
 };
 
-export { displayList };
+export { displayList  };

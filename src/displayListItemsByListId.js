@@ -1,6 +1,8 @@
 import { listManager } from "./index.js";
-import { focusItemTitle } from "./focus.js";
-import { displayList } from "./displayList.js";
+import { displayList, } from "./displayList.js";
+
+// NOTE:  This module renders views of individual listItems, and is called by displayList.js module.
+// This code is slightly distinct from code in "displayAllTasks" and "displayListItemFromObj", which are used to render "All Tasks" view.
 
 const displayListItemsByListId = (id) => {
   const itemViewMain = document.querySelector("#itemViewMain");
@@ -19,11 +21,8 @@ const displayListItemsByListId = (id) => {
 
   const arr = [...listManager.getAllListItems(currentListId)];
 
-  console.log(arr.length);
-  //arr.forEach((item) => console.log(item));
-
   for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i]);
+    // console.log(arr[i]);
 
     // parent of itemIsCompletedCheckBoxDiv, itemContainer, deleteItemBtnContainer
     const itemContainer = document.createElement("div");
@@ -43,7 +42,7 @@ const displayListItemsByListId = (id) => {
 
     const createTextField = (text, container, method) => {
       const value = arr[i][text];
-      const enterKeyPressed = false;
+      let enterKeyPressed = false;
       const cellContainer = document.createElement("div");
       const cell = document.createElement("input");
       cell.setAttribute(`data-${text}`, arr[i].itemId);

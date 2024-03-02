@@ -4,9 +4,9 @@ const focusListTitle = (id) => {
 }
 
 const focusItemTitle = (id) => {
-    console.log(`ID in focusItemTitle: ${id}`)
+    // console.log(`ID in focusItemTitle: ${id}`)
     const listItemTitleField = document.querySelector(`[data-itemtitle=${id}]`);
     listItemTitleField.focus();
 }
 
-export {focusListTitle, focusItemTitle}
+export { focusListTitle, focusItemTitle }
