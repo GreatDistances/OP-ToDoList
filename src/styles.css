@@ -199,6 +199,7 @@ input {
 .fields {
     width: calc(100% - 10px);
     text-overflow: ellipsis;
+    font-size: 0.8em;
     color: hsl(0, 0%, 4%);
     background-color: white;
     border-bottom: 1px solid grey;
@@ -208,22 +209,29 @@ input {
     padding: 6px;
 }
 
+
 .listTitleContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+    }
 
 .listTitleContainer h1 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
-.listTitleContainer h3 {
+.listTitleContainer p {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .itemViewMain {

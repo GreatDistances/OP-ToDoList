@@ -18,7 +18,7 @@ const displayAllTasks = () => {
   );
   const listTitleContainer = document.createElement("div");
   const listTitleH1 = document.createElement("h1");
-  const listIdH1 = document.createElement("h3");
+  const listIdP = document.createElement("p");
   const listItemBtnDivContainer = document.createElement("div");
   listItemBtnDivContainer.classList.add("listItemBtnDivContainer");
   const listItemSortBtnDiv = document.createElement("div");
@@ -40,7 +40,7 @@ const displayAllTasks = () => {
 
   displayTitle = `All Tasks`;
   listTitleH1.innerText = displayTitle;
-  listIdH1.innerText = "Viewing All";
+  listIdP.innerText = "Viewing All";
 
   const loopThruItems = () => {
     itemContainerContainer.innerHTML = "";
@@ -155,7 +155,7 @@ const displayAllTasks = () => {
   createSortByDateBtn();
   createSortByItemIsCompletedBtn();
   createSortByPriorityBtn();
-  listTitleContainer.append(listTitleH1, listIdH1); // add list title & list id to header container
+  listTitleContainer.append(listTitleH1, listIdP); // add list title & list id to header container
   listItemBtnDivContainer.append(newItemBtn); // add new item button to header button main container
   listItemSortBtnDiv.append(sortByDateBtn);
   listItemSortBtnDiv.append(sortByItemIsCompletedBtn);

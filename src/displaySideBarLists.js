@@ -36,6 +36,7 @@ const displayAllLists = () => {
         listTitleField = document.createElement("input");
         listTitleField.value = lists[i].listTitle;
         listTitleField.classList.add("fields");
+        listTitleField.maxLength = 28;
       }
       listTitleField.setAttribute("data-list-title-id", thisListId);
       thisList.append(listTitleField);

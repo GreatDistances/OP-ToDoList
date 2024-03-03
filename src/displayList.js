@@ -22,7 +22,7 @@ const itemViewHeaderContainer = document.querySelector("#itemViewHeaderContainer
 const itemContainerContainer = document.querySelector("#itemContainerContainer");
 const listTitleContainer = document.createElement("div");
 const listTitleH1 = document.createElement("h1");
-const listIdH1 = document.createElement("h3");
+const listIdP = document.createElement("p");
 const listItemBtnDivContainer = document.createElement("div");
 listItemBtnDivContainer.classList.add("listItemBtnDivContainer");
 const listItemSortBtnDiv = document.createElement("div");
@@ -114,7 +114,7 @@ const sortByPriorityBtn = document.createElement("button");
       }
       displayListId = `ID # ${lists[i].listId}`;
       listTitleH1.innerText = displayTitle;
-      listIdH1.innerText = displayListId;
+      listIdP.innerText = displayListId;
       if (lists[i].listItems.length > 0) {
         displayListItemsByListId(id);
       } else {
@@ -132,7 +132,7 @@ const sortByPriorityBtn = document.createElement("button");
   createSortByDateBtn();
   createSortByItemIsCompletedBtn();
   createSortByPriorityBtn();
-  listTitleContainer.append(listTitleH1, listIdH1); // add list title & list id to header container
+  listTitleContainer.append(listTitleH1, listIdP); // add list title & list id to header container
   listItemBtnDivContainer.append(newItemBtn); // add new item button to header button main container
   listItemSortBtnDiv.append(sortByDateBtn);
   listItemSortBtnDiv.append(sortByItemIsCompletedBtn);
