@@ -319,6 +319,24 @@ input[type="checkbox"] {
     .itemFieldsContainer > :nth-child(3) {
         grid-column: span 2;
     }
+}
+
+@media only screen and (max-width: 600px) {
+    .itemFieldsContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        align-items:baseline;
+        gap: 0px;
+    }
+    .itemFieldsContainer > :nth-child(1) {
+        grid-column: span 4;
+    }
+    .itemFieldsContainer > :nth-child(2) {
+        grid-column: span 4;
+    }
+    .itemFieldsContainer > :nth-child(3) {
+        grid-column: span 2;
+    }
     }
 
 .listItemLabel {
